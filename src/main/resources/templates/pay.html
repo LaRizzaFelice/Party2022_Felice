@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pay</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+</head>
+<body>
+    <div th:replace="fragments/header :: header">header</div>
+    <div class="container">
+        <h1>Pay</h1>
+        <p>Please pay before <span th:text="${paydate}"></span></p>
+        <p th:if="${weekend}">Have a nice weekend!</p>
+        <p th:unless="${weekend}">Weekend is coming closer!</p>
+    </div>
+</body>
+</html>

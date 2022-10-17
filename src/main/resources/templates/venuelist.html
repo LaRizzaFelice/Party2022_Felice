@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Venue list</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">header</div>
+
+<div class="container">
+<h1>Venue list</h1>
+<ul class="buttonlist">
+    <li th:each="venue, iStat:${venues}">
+        <a th:href="@{|/venuedetailsbyindex/${iStat.index}|}" th:text="|${(venue.getVenueName())}', met index: ' ${iStat.index} ' met in totaal ' ${iStat.size} ' elementen.'|" href="">venue name</a>
+    </li>
+
+</ul>
+</div>
+</body>
+</html>

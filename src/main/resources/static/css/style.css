@@ -1,0 +1,76 @@
+html, body{
+    font-family: Verdana;
+    background: #111111;
+    padding: 0;
+    margin: 0;
+}
+h1{
+    color: deeppink;
+    font-size: 18px;
+}
+p{
+    color:#cccccc;
+    font-size: 12px;
+}
+
+
+
+.buttonlook{
+    background-color: #999999;
+    color: white;
+    display: block;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.container{
+    margin: 10px;
+}
+
+.buttonlook:hover{
+    background-color: deeppink;
+}
+
+.menubutton{
+    float: left;
+    margin-left: 10px;
+
+}
+
+.nav{
+    overflow: hidden;
+    position: relative;
+    top:170px;
+}
+
+.header{
+    background-image: url("../img/partybanner.jpg");
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+}
+
+.buttonlist{
+    list-style: none;
+}
+
+.buttonlist li a{
+    background-color: #999999;
+    color: white;
+    display: block;
+    width: 800px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+.buttonlist li a:hover{
+    background-color: deeppink;
+}
