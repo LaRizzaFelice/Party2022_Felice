@@ -13,8 +13,6 @@ p{
     font-size: 12px;
 }
 
-
-
 .buttonlook{
     background-color: #999999;
     color: white;
@@ -28,7 +26,10 @@ p{
 }
 
 .container{
-    margin: 10px;
+    width:80%;
+    margin-left:auto;
+    margin-right: auto;
+    float: left;
 }
 
 .buttonlook:hover{
@@ -71,6 +72,40 @@ p{
     margin-bottom: 15px;
 }
 
+.nextprev{
+    margin-top: 150px;
+    background-color: deeppink;
+    display: block;
+    width: 20px;
+    line-height: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.nextprev:hover{
+    background-color: magenta;
+    width: 25px;
+    font-size: 25px;
+    line-height: 25px;
+    margin-top: 148px;
+}
+
+.border{
+    width: 10%;
+    float: left;
+}
 .buttonlist li a:hover{
     background-color: deeppink;
+}
+.linkercontainer{
+    float:left;
+    width:30%;
+}
+.rechtercontainer{
+    float:left;
+    width:50%;
 }

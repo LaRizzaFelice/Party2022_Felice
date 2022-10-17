@@ -20,11 +20,11 @@ public class HomeController {
     private final String [] venuenames = {"Carré", "Zillion", "Cherrymoon", "Boccaccio", "Carat"};
 
     private final Venue [] venues = {
-            new Venue("Carré", "Website Carré"),
-            new Venue("Zillion", "Website Zillion"),
-            new Venue("Cherrymoon", "Website Cherrymoon"),
-            new Venue("Boccaccio", "Website Boccaccio"),
-            new Venue("Carat", "Website Carat"),
+            new Venue("Carré", "Website Carré", 500, true, true, false,false, "Willebroek", 5),
+            new Venue("Zillion", "Website Zillion", 500, true, true, false,false, "Antwerpen", 0),
+            new Venue("Cherrymoon", "Website Cherrymoon", 500, true, true, false,false, "Knokke", 2),
+            new Venue("Boccaccio", "Website Boccaccio", 500, true, true, false,false, "Ergens", 2),
+            new Venue("Carat", "Website Carat", 500, true, true, false,false, "Ergensnogverder", 2),
 };
 
     @GetMapping(value = {"/", "/home", "/home/"})
@@ -76,28 +76,27 @@ public class HomeController {
 
     @GetMapping({"/venuedetailsbyindex","/venuedetailsbyindex/","/venuedetailsbyindex/{venueindex}"})
     public String venuedetailsbyindex(Model model, @PathVariable(required = false) String venueindex){
-        String venueTitle = "";
-        if(venueindex !=null && Integer.parseInt(venueindex)%1 == 0 && Integer.parseInt(venueindex)>= 0 && Integer.parseInt(venueindex)< 5 )
+        Venue venue = null;
+        if(venueindex !=null && Integer.parseInt(venueindex)%1 == 0 && Integer.parseInt(venueindex)>= 0 && Integer.parseInt(venueindex)< venues.length )
         {
             //get venue data here
-            venueTitle = venuenames[Integer.parseInt(venueindex)];
+            venue = venues[Integer.parseInt(venueindex)];
         }
-        else
-        {
-            venueTitle = "no valid venue";
-        }
+
         int prevIndex = Integer.parseInt(venueindex)-1;
+
         if(prevIndex<0){
-            prevIndex = venuenames.length - 1;
+            prevIndex = venuenames.length -1;
         }
 
         int nextIndex = Integer.parseInt(venueindex)+1;
-        if(nextIndex >4)
+
+        if(nextIndex > venues.length -1)
         {
             nextIndex = 0;
         }
 
-        model.addAttribute("venueTitle",venueTitle);
+        model.addAttribute("venue",venue);
         model.addAttribute("prevIndex", prevIndex);
         model.addAttribute("nextIndex", nextIndex);
         return "venuedetailsbyindex";
