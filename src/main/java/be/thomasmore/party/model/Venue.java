@@ -1,24 +1,35 @@
 package be.thomasmore.party.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Venue {
+    @Id
+    private int id;
     private String venueName;
     private String linkMoreInfo;
     private int capacity;
-    private boolean isFoodProvided;
-    private boolean isIndoor;
-    private boolean isOutdoor;
-    private boolean isFreeParkingAvailable;
+    private boolean foodProvided;
+    private boolean indoor;
+    private boolean outdoor;
+    private boolean freeParkingAvailable;
     private String city;
     private int distanceFromPublicTransportInKm;
+
+    public Venue() {
+
+    }
+
 
     public Venue(String venueName, String linkMoreInfo, int capacity, boolean isFoodProvided, boolean isIndoor, boolean isOutdoor, boolean isFreeParkingAvailable, String city, int distanceFromPublicTransportInKm) {
         this.venueName = venueName;
         this.linkMoreInfo = linkMoreInfo;
         this.capacity = capacity;
-        this.isFoodProvided = isFoodProvided;
-        this.isIndoor = isIndoor;
-        this.isOutdoor = isOutdoor;
-        this.isFreeParkingAvailable = isFreeParkingAvailable;
+        this.foodProvided = isFoodProvided;
+        this.indoor = isIndoor;
+        this.outdoor = isOutdoor;
+        this.freeParkingAvailable = isFreeParkingAvailable;
         this.city = city;
         this.distanceFromPublicTransportInKm = distanceFromPublicTransportInKm;
     }
@@ -36,19 +47,19 @@ public class Venue {
     }
 
     public boolean isFoodProvided() {
-        return isFoodProvided;
+        return foodProvided;
     }
 
     public boolean isIndoor() {
-        return isIndoor;
+        return indoor;
     }
 
     public boolean isOutdoor() {
-        return isOutdoor;
+        return outdoor;
     }
 
     public boolean isFreeParkingAvailable() {
-        return isFreeParkingAvailable;
+        return freeParkingAvailable;
     }
 
     public String getCity() {
@@ -65,5 +76,9 @@ public class Venue {
 
     public void setLinkMoreInfo(String linkMoreInfo) {
         this.linkMoreInfo = linkMoreInfo;
+    }
+
+    public int getId() {
+        return id;
     }
 }
