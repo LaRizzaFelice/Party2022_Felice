@@ -1,4 +1,4 @@
-package be.thomasmore.party.model;
+package be.buschop.ap2022b.party.controllers;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

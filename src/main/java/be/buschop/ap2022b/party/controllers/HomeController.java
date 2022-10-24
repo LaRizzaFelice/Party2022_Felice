@@ -1,14 +1,11 @@
 package be.buschop.ap2022b.party.controllers;
 
 
-import be.thomasmore.party.model.Venue;
-import org.hibernate.query.criteria.internal.predicate.BooleanExpressionPredicate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.lang.reflect.Array;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
