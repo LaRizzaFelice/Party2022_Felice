@@ -12,7 +12,7 @@
 <h1>Venue list</h1>
 <ul class="buttonlist">
     <li th:each="venue, iStat:${venues}">
-        <a th:href="@{|/venuedetailsbyindex/${iStat.index}|}" th:text="|${(venue.getVenueName())}', met index: ' ${iStat.index} ' met in totaal ' ${iStat.size} ' elementen.'|" href="">venue name</a>
+        <a th:href="@{|/venuedetailsbyid/*{iStat.index +1}|}" th:text="|${venue.getVenueName()}|" href="">venue name</a>
     </li>
 
 </ul>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Venue details</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../static/css/style.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">header</div>
+<div class="border"><a th:href="@{|/venuedetailsbyid.html/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
+<div class="container"><h1 th:text="${venueTitle}">venueTitle</h1>
+    <p>Welcome to the Venue Index Page.</p></div>
+<div class="linkercontainer">
+    <p>info:</p>
+    <p>capacity:</p>
+    <p>food provided:</p>
+    <p>indoor:</p>
+    <p>outdoor:</p>
+    <p>free parking:</p>
+    <p>city:</p>
+    <p>distance from public transport:</p></div>
+<div class="rechtercontainer">
+    <p th:text="${venue.getLinkMoreInfo()}"> Get more info</p>
+    <p th:text="${venue.getCapacity()}">Capacity</p>
+    <p th:text="${venue.isFoodProvided()}">Is food provided</p>
+    <p th:text="${venue.isIndoor()}">Is indoor</p>
+    <p th:text="${venue.isOutdoor()}">Is outdoor</p>
+    <p th:text="${venue.isFreeParkingAvailable()}">Is free parking available</p>
+    <p th:text="${venue.getCity()}">City</p>
+    <p th:text="${venue.getDistanceFromPublicTransportInKm()}">Distance from public transport in km</p></div>
+<div class="border"><a th:href="@{|/venuedetailsbyindex/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
+</body>
+</html>
