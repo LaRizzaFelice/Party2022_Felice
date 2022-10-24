@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
+import java.util.Optional;
 
 
 @Controller
@@ -79,10 +79,34 @@ public class HomeController {
         return "venuedetails";
     }
 
-    @GetMapping({"/venuedetailsbyid", "/venuedetailsbyid/{id}"})
-    public String venueDetailsById(Model model,
-                                   @PathVariable(required = false) Integer id){
-        model.addAttribute("venue",venueRepository.findById(id).get());
+    @GetMapping({"/venuedetailsbyid","/venuedetailsbyid/","/venuedetailsbyid/{venueid}"})
+    public String venuedetailsbyid(Model model, @PathVariable(required = false) String venueid){
+
+        Optional oVenue = null;
+        Venue venue = null;
+        int venueCount = 0;
+
+        venueCount = (int) venueRepository.count();
+
+        oVenue = venueRepository.findById(Integer.parseInt(venueid));
+        if(oVenue.isPresent()){
+            venue = (Venue) oVenue.get();
+        }
+
+        int prevId = Integer.parseInt(venueid)-1;
+        if(prevId<1){
+            prevId = venueCount;
+        }
+
+        int nextId = Integer.parseInt(venueid)+1;
+        if(nextId > venueCount)
+        {
+            nextId = 1;
+        }
+
+        model.addAttribute("venue", venue);
+        model.addAttribute("prevIndex", prevId);
+        model.addAttribute("nextIndex", nextId);
         return "venuedetailsbyid";
     }
 
