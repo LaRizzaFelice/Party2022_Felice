@@ -1,6 +1,8 @@
 package be.buschop.ap2022b.party.controllers;
 
 
+import be.buschop.ap2022b.party.repositories.VenueRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,9 @@ import java.util.Date;
 public class HomeController {
     private final int mySpecialNumber = 35;
     private final String [] venuenames = {"Carré", "Zillion", "Cherrymoon", "Boccaccio", "Carat"};
+
+    @Autowired
+    private VenueRepository venueRepository;
 
     private final Venue [] venues = {
             new Venue("Carré", "Website Carré", 500, true, true, false,false, "Willebroek", 5),
@@ -63,6 +68,7 @@ public class HomeController {
 
     @GetMapping("/venuelist")
     public String venuelist (Model model){
+        Iterable<Venue> venues = venueRepository.findAll();
         model.addAttribute("venues", venues );
         return "venuelist";
     }
