@@ -2,6 +2,7 @@ package be.buschop.ap2022b.party.controllers;
 
 
 import be.buschop.ap2022b.party.repositories.VenueRepository;
+import model.Venue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +24,7 @@ public class HomeController {
     @Autowired
     private VenueRepository venueRepository;
 
-    private final Venue [] venues = {
+    private final Venue[] venues = {
             new Venue("Carré", "Website Carré", 500, true, true, false,false, "Willebroek", 5),
             new Venue("Zillion", "Website Zillion", 500, true, true, false,false, "Antwerpen", 0),
             new Venue("Cherrymoon", "Website Cherrymoon", 500, true, true, false,false, "Knokke", 2),

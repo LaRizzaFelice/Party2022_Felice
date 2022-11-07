@@ -1,4 +1,4 @@
-package be.buschop.ap2022b.party.controllers;
+package model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
