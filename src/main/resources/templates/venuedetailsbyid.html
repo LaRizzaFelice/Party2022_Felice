@@ -28,7 +28,7 @@
         <p th:text="${venue.isFreeParkingAvailable()}">Is free parking available</p>
         <p th:text="${venue.getCity()}">City</p>
         <p th:text="${venue.getDistanceFromPublicTransportInKm()}">Distance from public transport in km</p></div>
-    <div class="border"><a th:href="@{|/venuedetailsbyindex/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
+    <div class="border"><a th:href="@{|/venuedetailsbyid/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
 </div>
 <h1 th:if="${idNull}"> No valid venue is chosen</h1>
 
