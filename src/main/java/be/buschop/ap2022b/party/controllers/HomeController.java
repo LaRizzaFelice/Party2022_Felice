@@ -2,7 +2,7 @@ package be.buschop.ap2022b.party.controllers;
 
 
 import be.buschop.ap2022b.party.repositories.VenueRepository;
-import model.Venue;
+import be.buschop.ap2022b.party.model.Venue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

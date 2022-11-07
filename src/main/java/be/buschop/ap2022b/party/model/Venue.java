@@ -1,4 +1,4 @@
-package model;
+package be.buschop.ap2022b.party.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
