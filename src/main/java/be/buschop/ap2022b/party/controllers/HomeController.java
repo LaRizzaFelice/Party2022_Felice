@@ -93,6 +93,8 @@ public class HomeController {
         return "venuedetails";
     }
 
+
+
     @GetMapping({"/venuedetailsbyid","/venuedetailsbyid/","/venuedetailsbyid/{venueid}"})
     public String venuedetailsbyid(Model model,
                                    @PathVariable(required = false) String venueid){
@@ -131,7 +133,43 @@ public class HomeController {
         return "venuedetailsbyid";
     }
 
+    @GetMapping({"/artistdetailsbyid","/artistdetailsbyid/","/artistdetailsbyid/{artistid}"})
+    public String artistdetailsbyid(Model model,
+                                   @PathVariable(required = false) String artistid){
 
+        Optional oArtist = null;
+        Artist artist = null;
+        int artistCount = 0;
+        boolean idNull = false;
+
+        artistCount = (int) artistRepository.count();
+
+        if(Integer.parseInt(artistid) <= 0 || Integer.parseInt(artistid)> artistCount){
+            idNull = true;
+        }
+
+        oArtist = artistRepository.findById(Integer.parseInt(artistid));
+        if(oArtist.isPresent()){
+            artist= (Artist) oArtist.get();
+        }
+
+        int prevId = Integer.parseInt(artistid)-1;
+        if(prevId<1){
+            prevId = artistCount;
+        }
+
+        int nextId = Integer.parseInt(artistid)+1;
+        if(nextId > artistCount)
+        {
+            nextId = 1;
+        }
+
+        model.addAttribute("artist", artist);
+        model.addAttribute("prevIndex", prevId);
+        model.addAttribute("nextIndex", nextId);
+        model.addAttribute("idNull",idNull);
+        return "artistdetailsbyid";
+    }
 
     @GetMapping({"/venuedetailsbyindex","/venuedetailsbyindex/","/venuedetailsbyindex/{venueindex}"})
     public String venuedetailsbyindex(Model model, @PathVariable(required = false) String venueindex){

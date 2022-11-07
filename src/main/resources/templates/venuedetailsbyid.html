@@ -8,7 +8,7 @@
 <body>
 <div th:replace="fragments/header :: header">header</div>
 <div th:if="${venue}">
-    <div class="border"><a th:href="@{|/venuedetailsbyid.html/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
+    <div class="border"><a th:href="@{|/venuedetailsbyid/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
     <div class="container"><h1 th:text="${venue.getVenueName()}">venueTitle</h1></div>
     <div class="linkercontainer">
         <p>info:</p>

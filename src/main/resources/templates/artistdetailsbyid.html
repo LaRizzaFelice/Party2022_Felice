@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Artist details</title>
+    <link href="../static/css/style.css" media="all" rel="stylesheet" th:href="@{/css/style.css}" type="text/css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header">header</div>
+<div th:if="${artist}" class="border"><a class="nextprev" href="#" th:href="@{|/artistdetailsbyid/${prevId}|}">&lt;</a>
+</div>
+<div th:if="${artist}" class="container"><h1 th:text="${artist.getArtistName()}">ArtistTitle</h1></div>
+<div th:if="${artist}" class="linkercontainer"><p>naam artist:</p>
+    <p>bio:</p>
+    <p>genre:</p>
+    <p>link more info:</p>
+    <p>portfolio:</p></div>
+<div th:if="${artist}" class="rechtercontainer"><p th:text="${artist.getArtistName()}"> artist naam</p>
+    <p th:text="${artist.getBio()}">Bio</p>
+    <p th:text="${artist.getGenre()}">Genre</p>
+    <p th:text="${artist.getLinkMoreInfo()}">Link more info</p>
+    <p th:text="${artist.getPortfolio()}">Portfolio</p></div>
+<p th:unless="${artist}">No valid artist is chosen</p>
+<p th:if="${artist}">No valid artist is chosen</p>
+<div th:if="${artist}" class="border"><a class="nextprev" href="#" th:href="@{|/artistdetailsbyid/${nextId}|}">&gt;</a>
+</div>
+</body>
+</html>
