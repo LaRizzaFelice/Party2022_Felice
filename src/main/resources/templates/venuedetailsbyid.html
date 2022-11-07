@@ -7,27 +7,30 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">header</div>
-<div class="border"><a th:href="@{|/venuedetailsbyid.html/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
-<div class="container"><h1 th:text="${venueTitle}">venueTitle</h1>
-    <p>Welcome to the Venue Index Page.</p></div>
-<div class="linkercontainer">
-    <p>info:</p>
-    <p>capacity:</p>
-    <p>food provided:</p>
-    <p>indoor:</p>
-    <p>outdoor:</p>
-    <p>free parking:</p>
-    <p>city:</p>
-    <p>distance from public transport:</p></div>
-<div class="rechtercontainer">
-    <p th:text="${venue.getLinkMoreInfo()}"> Get more info</p>
-    <p th:text="${venue.getCapacity()}">Capacity</p>
-    <p th:text="${venue.isFoodProvided()}">Is food provided</p>
-    <p th:text="${venue.isIndoor()}">Is indoor</p>
-    <p th:text="${venue.isOutdoor()}">Is outdoor</p>
-    <p th:text="${venue.isFreeParkingAvailable()}">Is free parking available</p>
-    <p th:text="${venue.getCity()}">City</p>
-    <p th:text="${venue.getDistanceFromPublicTransportInKm()}">Distance from public transport in km</p></div>
-<div class="border"><a th:href="@{|/venuedetailsbyindex/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
+<div th:if="${venue}">
+    <div class="border"><a th:href="@{|/venuedetailsbyid.html/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
+    <div class="container"><h1 th:text="${venue.getVenueName()}">venueTitle</h1></div>
+    <div class="linkercontainer">
+        <p>info:</p>
+        <p>capacity:</p>
+        <p>food provided:</p>
+        <p>indoor:</p>
+        <p>outdoor:</p>
+        <p>free parking:</p>
+        <p>city:</p>
+        <p>distance from public transport:</p></div>
+    <div class="rechtercontainer">
+        <p th:text="${venue.getLinkMoreInfo()}"> Get more info</p>
+        <p th:text="${venue.getCapacity()}">Capacity</p>
+        <p th:text="${venue.isFoodProvided()}">Is food provided</p>
+        <p th:text="${venue.isIndoor()}">Is indoor</p>
+        <p th:text="${venue.isOutdoor()}">Is outdoor</p>
+        <p th:text="${venue.isFreeParkingAvailable()}">Is free parking available</p>
+        <p th:text="${venue.getCity()}">City</p>
+        <p th:text="${venue.getDistanceFromPublicTransportInKm()}">Distance from public transport in km</p></div>
+    <div class="border"><a th:href="@{|/venuedetailsbyindex/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
+</div>
+<h1 th:if="${idNull}"> No valid venue is chosen</h1>
+
 </body>
 </html>

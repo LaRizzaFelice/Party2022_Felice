@@ -80,13 +80,19 @@ public class HomeController {
     }
 
     @GetMapping({"/venuedetailsbyid","/venuedetailsbyid/","/venuedetailsbyid/{venueid}"})
-    public String venuedetailsbyid(Model model, @PathVariable(required = false) String venueid){
+    public String venuedetailsbyid(Model model,
+                                   @PathVariable(required = false) String venueid){
 
         Optional oVenue = null;
         Venue venue = null;
         int venueCount = 0;
+        boolean idNull = false;
 
         venueCount = (int) venueRepository.count();
+
+        if(Integer.parseInt(venueid) <= 0 || Integer.parseInt(venueid)> venueCount){
+            idNull = true;
+        }
 
         oVenue = venueRepository.findById(Integer.parseInt(venueid));
         if(oVenue.isPresent()){
@@ -107,6 +113,7 @@ public class HomeController {
         model.addAttribute("venue", venue);
         model.addAttribute("prevIndex", prevId);
         model.addAttribute("nextIndex", nextId);
+        model.addAttribute("idNull",idNull);
         return "venuedetailsbyid";
     }
 
