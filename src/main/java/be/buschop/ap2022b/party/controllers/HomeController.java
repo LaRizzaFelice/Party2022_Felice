@@ -1,6 +1,8 @@
 package be.buschop.ap2022b.party.controllers;
 
 
+import be.buschop.ap2022b.party.model.Artist;
+import be.buschop.ap2022b.party.repositories.ArtistRepository;
 import be.buschop.ap2022b.party.repositories.VenueRepository;
 import be.buschop.ap2022b.party.model.Venue;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class HomeController {
 
     @Autowired
     private VenueRepository venueRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     private final Venue[] venues = {
             new Venue("Carré", "Website Carré", 500, true, true, false,false, "Willebroek", 5),
@@ -73,6 +78,14 @@ public class HomeController {
         model.addAttribute("venues", venues );
         return "venuelist";
     }
+
+    @GetMapping("/artistlist")
+    public String artistList (Model model){
+        Iterable<Artist> artists= artistRepository.findAll();
+        model.addAttribute("artists", artists);
+        return "artistList";
+    }
+
 
     @GetMapping({"/venuedetails","/venuedetails/","/venuedetails/{venuename}"})
     public String venuedetails(Model model, @PathVariable(required = false) String venuename){
