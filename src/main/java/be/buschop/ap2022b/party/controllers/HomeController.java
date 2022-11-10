@@ -85,6 +85,13 @@ public class HomeController {
         model.addAttribute("artists", artists);
         return "artistList";
     }
+    @GetMapping("venuelist/outdoor/yes")
+    public String venuelistOutdoorYes (Model model)
+    {
+        Iterable<Venue> venues = venueRepository.findByOutdoor(true);
+        model.addAttribute("venues", venues);
+        return "venuelist";
+    }
 
 
     @GetMapping({"/venuedetails","/venuedetails/","/venuedetails/{venuename}"})
