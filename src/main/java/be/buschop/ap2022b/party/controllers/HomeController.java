@@ -21,7 +21,7 @@ import java.util.Optional;
 @Controller
 public class HomeController {
     private final int mySpecialNumber = 35;
-    private final String [] venuenames = {"Carré", "Zillion", "Cherrymoon", "Boccaccio", "Carat"};
+    private final String[] venuenames = {"Carré", "Zillion", "Cherrymoon", "Boccaccio", "Carat"};
 
     @Autowired
     private VenueRepository venueRepository;
@@ -30,88 +30,83 @@ public class HomeController {
     private ArtistRepository artistRepository;
 
     private final Venue[] venues = {
-            new Venue("Carré", "Website Carré", 500, true, true, false,false, "Willebroek", 5),
-            new Venue("Zillion", "Website Zillion", 500, true, true, false,false, "Antwerpen", 0),
-            new Venue("Cherrymoon", "Website Cherrymoon", 500, true, true, false,false, "Knokke", 2),
-            new Venue("Boccaccio", "Website Boccaccio", 500, true, true, false,false, "Ergens", 2),
-            new Venue("Carat", "Website Carat", 500, true, true, false,false, "Ergensnogverder", 2),
-};
+            new Venue("Carré", "Website Carré", 500, true, true, false, false, "Willebroek", 5),
+            new Venue("Zillion", "Website Zillion", 500, true, true, false, false, "Antwerpen", 0),
+            new Venue("Cherrymoon", "Website Cherrymoon", 500, true, true, false, false, "Knokke", 2),
+            new Venue("Boccaccio", "Website Boccaccio", 500, true, true, false, false, "Ergens", 2),
+            new Venue("Carat", "Website Carat", 500, true, true, false, false, "Ergensnogverder", 2),
+    };
 
     @GetMapping(value = {"/", "/home", "/home/"})
-    public String home (Model model){
-        model.addAttribute("mySpecialNumber",mySpecialNumber);
+    public String home(Model model) {
+        model.addAttribute("mySpecialNumber", mySpecialNumber);
         return "home";
     }
 
     @GetMapping("/pay")
-    public String pay(Model model){
+    public String pay(Model model) {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Date today = new Date();
         Calendar c = Calendar.getInstance();
         c.setTime(today);
 
         Boolean weekend = false;
-        if(c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY )
-        {
+        if (c.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
             weekend = true;
         }
 
 
-        c.add(Calendar.DATE,5);
+        c.add(Calendar.DATE, 5);
         Date paydate = c.getTime();
 
 
-
         model.addAttribute("paydate", format.format(paydate));
-        model.addAttribute("weekend",weekend);
+        model.addAttribute("weekend", weekend);
         return "pay";
     }
 
     @GetMapping("/about")
-    public String about (){
+    public String about() {
         return "about";
     }
 
     @GetMapping("/venuelist")
-    public String venuelist (Model model){
+    public String venuelist(Model model) {
         Iterable<Venue> venues = venueRepository.findAll();
-        model.addAttribute("venues", venues );
+        model.addAttribute("venues", venues);
         return "venuelist";
     }
 
     @GetMapping("/artistlist")
-    public String artistList (Model model){
-        Iterable<Artist> artists= artistRepository.findAll();
+    public String artistList(Model model) {
+        Iterable<Artist> artists = artistRepository.findAll();
         model.addAttribute("artists", artists);
         return "artistList";
     }
-    @GetMapping("venuelist/outdoor/yes")
-    public String venuelistOutdoorYes (Model model)
-    {
-        Iterable<Venue> venues = venueRepository.findByOutdoor(true);
+
+    @GetMapping("venuelist/outdoor/{outdoor}")
+    public String venuelistOutdoor(Model model, @PathVariable(required = false) String outdoor) {
+        Iterable<Venue> venues = venueRepository.findAll();
+        if (outdoor.equals("yes")) {
+            venues = venueRepository.findByOutdoor(true);
+        } else if (outdoor.equals("no")) {
+            venues = venueRepository.findByOutdoor(false);
+        }
+
         model.addAttribute("venues", venues);
         return "venuelist";
     }
 
-    @GetMapping("venuelist/outdoor/no")
-    public String venuelistOutdoorNo (Model model)
-    {
-        Iterable<Venue> venues = venueRepository.findByOutdoor(false);
-        model.addAttribute("venues", venues);
-        return "venuelist";
-    }
-
-    @GetMapping({"/venuedetails","/venuedetails/","/venuedetails/{venuename}"})
-    public String venuedetails(Model model, @PathVariable(required = false) String venuename){
-        model.addAttribute("venuename",venuename);
+    @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venuename}"})
+    public String venuedetails(Model model, @PathVariable(required = false) String venuename) {
+        model.addAttribute("venuename", venuename);
         return "venuedetails";
     }
 
 
-
-    @GetMapping({"/venuedetailsbyid","/venuedetailsbyid/","/venuedetailsbyid/{venueid}"})
+    @GetMapping({"/venuedetailsbyid", "/venuedetailsbyid/", "/venuedetailsbyid/{venueid}"})
     public String venuedetailsbyid(Model model,
-                                   @PathVariable(required = false) String venueid){
+                                   @PathVariable(required = false) String venueid) {
 
         Optional oVenue = null;
         Venue venue = null;
@@ -120,36 +115,35 @@ public class HomeController {
 
         venueCount = (int) venueRepository.count();
 
-        if(Integer.parseInt(venueid) <= 0 || Integer.parseInt(venueid)> venueCount){
+        if (Integer.parseInt(venueid) <= 0 || Integer.parseInt(venueid) > venueCount) {
             idNull = true;
         }
 
         oVenue = venueRepository.findById(Integer.parseInt(venueid));
-        if(oVenue.isPresent()){
+        if (oVenue.isPresent()) {
             venue = (Venue) oVenue.get();
         }
 
-        int prevId = Integer.parseInt(venueid)-1;
-        if(prevId<1){
+        int prevId = Integer.parseInt(venueid) - 1;
+        if (prevId < 1) {
             prevId = venueCount;
         }
 
-        int nextId = Integer.parseInt(venueid)+1;
-        if(nextId > venueCount)
-        {
+        int nextId = Integer.parseInt(venueid) + 1;
+        if (nextId > venueCount) {
             nextId = 1;
         }
 
         model.addAttribute("venue", venue);
         model.addAttribute("prevIndex", prevId);
         model.addAttribute("nextIndex", nextId);
-        model.addAttribute("idNull",idNull);
+        model.addAttribute("idNull", idNull);
         return "venuedetailsbyid";
     }
 
-    @GetMapping({"/artistdetailsbyid","/artistdetailsbyid/","/artistdetailsbyid/{artistid}"})
+    @GetMapping({"/artistdetailsbyid", "/artistdetailsbyid/", "/artistdetailsbyid/{artistid}"})
     public String artistdetailsbyid(Model model,
-                                   @PathVariable(required = false) String artistid){
+                                    @PathVariable(required = false) String artistid) {
 
         Optional oArtist = null;
         Artist artist = null;
@@ -158,61 +152,57 @@ public class HomeController {
 
         artistCount = (int) artistRepository.count();
 
-        if(Integer.parseInt(artistid) <= 0 || Integer.parseInt(artistid)> artistCount){
+        if (Integer.parseInt(artistid) <= 0 || Integer.parseInt(artistid) > artistCount) {
             idNull = true;
         }
 
         oArtist = artistRepository.findById(Integer.parseInt(artistid));
-        if(oArtist.isPresent()){
-            artist= (Artist) oArtist.get();
+        if (oArtist.isPresent()) {
+            artist = (Artist) oArtist.get();
         }
 
-        int prevId = Integer.parseInt(artistid)-1;
-        if(prevId<1){
+        int prevId = Integer.parseInt(artistid) - 1;
+        if (prevId < 1) {
             prevId = artistCount;
         }
 
-        int nextId = Integer.parseInt(artistid)+1;
-        if(nextId > artistCount)
-        {
+        int nextId = Integer.parseInt(artistid) + 1;
+        if (nextId > artistCount) {
             nextId = 1;
         }
 
         model.addAttribute("artist", artist);
         model.addAttribute("prevIndex", prevId);
         model.addAttribute("nextIndex", nextId);
-        model.addAttribute("idNull",idNull);
+        model.addAttribute("idNull", idNull);
         return "artistdetailsbyid";
     }
 
-    @GetMapping({"/venuedetailsbyindex","/venuedetailsbyindex/","/venuedetailsbyindex/{venueindex}"})
-    public String venuedetailsbyindex(Model model, @PathVariable(required = false) String venueindex){
+    @GetMapping({"/venuedetailsbyindex", "/venuedetailsbyindex/", "/venuedetailsbyindex/{venueindex}"})
+    public String venuedetailsbyindex(Model model, @PathVariable(required = false) String venueindex) {
         Venue venue = null;
-        if(venueindex !=null && Integer.parseInt(venueindex)%1 == 0 && Integer.parseInt(venueindex)>= 0 && Integer.parseInt(venueindex)< venues.length )
-        {
+        if (venueindex != null && Integer.parseInt(venueindex) % 1 == 0 && Integer.parseInt(venueindex) >= 0 && Integer.parseInt(venueindex) < venues.length) {
             //get venue data here
             venue = venues[Integer.parseInt(venueindex)];
         }
 
-        int prevIndex = Integer.parseInt(venueindex)-1;
+        int prevIndex = Integer.parseInt(venueindex) - 1;
 
-        if(prevIndex<0){
-            prevIndex = venuenames.length -1;
+        if (prevIndex < 0) {
+            prevIndex = venuenames.length - 1;
         }
 
-        int nextIndex = Integer.parseInt(venueindex)+1;
+        int nextIndex = Integer.parseInt(venueindex) + 1;
 
-        if(nextIndex > venues.length -1)
-        {
+        if (nextIndex > venues.length - 1) {
             nextIndex = 0;
         }
 
-        model.addAttribute("venue",venue);
+        model.addAttribute("venue", venue);
         model.addAttribute("prevIndex", prevIndex);
         model.addAttribute("nextIndex", nextIndex);
         return "venuedetailsbyindex";
     }
-
 
 
 }
