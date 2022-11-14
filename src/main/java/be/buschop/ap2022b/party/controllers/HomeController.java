@@ -93,6 +93,13 @@ public class HomeController {
         return "venuelist";
     }
 
+    @GetMapping("venuelist/outdoor/no")
+    public String venuelistOutdoorNo (Model model)
+    {
+        Iterable<Venue> venues = venueRepository.findByOutdoor(false);
+        model.addAttribute("venues", venues);
+        return "venuelist";
+    }
 
     @GetMapping({"/venuedetails","/venuedetails/","/venuedetails/{venuename}"})
     public String venuedetails(Model model, @PathVariable(required = false) String venuename){

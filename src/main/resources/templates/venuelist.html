@@ -10,7 +10,13 @@
 
 <div class="container">
 <h1>Venue list</h1>
-<ul class="buttonlist">
+    <div class="sublist">
+        <p class=" menubutton ">Outdoor: </p>
+        <a class="buttonlook menubutton"  th:href="@{/venuelist/outdoor/yes}">Yes</a>
+        <a class="buttonlook menubutton"  th:href="@{/venuelist/outdoor/no}">No</a>
+        <a class="buttonlook menubutton"  th:href="@{/venuelist}">All</a>
+    </div>
+<ul class="page buttonlist">
     <li th:each="venue, iStat:${venues}">
         <a th:href="@{|/venuedetailsbyid/*{iStat.index +1}|}" th:text="|${venue.getVenueName()}|" href="">venue name</a>
     </li>

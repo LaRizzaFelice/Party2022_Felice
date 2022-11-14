@@ -8,6 +8,7 @@ h1{
     color: deeppink;
     font-size: 18px;
 }
+
 p{
     color:#cccccc;
     font-size: 12px;
@@ -108,4 +109,8 @@ p{
 .rechtercontainer{
     float:left;
     width:50%;
+}
+
+.sublist{
+    height: 45px;
 }
