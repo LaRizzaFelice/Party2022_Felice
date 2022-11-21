@@ -28,7 +28,7 @@ p{
 
 .buttonlookhighlight {
 
-    background-color: #888888;
+    background-color: deeppink;
     color: white;
     display: block;
     width: 150px;
@@ -51,13 +51,17 @@ p{
     background-color: deeppink;
 }
 
-
-
-
 .menubutton{
     float: left;
     margin-left: 10px;
 
+
+}
+
+.menubutton2{
+    float: left;
+    margin-left: 10px;
+    width: 100px;
 }
 
 .nav{
@@ -129,5 +133,9 @@ p{
 }
 
 .sublist{
+    height: 45px;
+}
+
+.sublist2{
     height: 45px;
 }

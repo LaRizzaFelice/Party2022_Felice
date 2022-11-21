@@ -99,6 +99,21 @@ public class HomeController {
         return "venuelist";
     }
 
+    @GetMapping("venuelist/indoor/{indoor}")
+    public String venuelistIndoor(Model model, @PathVariable(required = false) String indoor) {
+        Iterable<Venue> venues = venueRepository.findAll();
+        if (indoor.equals("yes")) {
+            venues = venueRepository.findByIndoor(true);
+        } else if (indoor.equals("no")) {
+            venues = venueRepository.findByIndoor(false);
+        }
+
+        model.addAttribute("venues", venues);
+        model.addAttribute("indoor", indoor);
+
+        return "venuelist";
+    }
+
     @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venuename}"})
     public String venuedetails(Model model, @PathVariable(required = false) String venuename) {
         model.addAttribute("venuename", venuename);
