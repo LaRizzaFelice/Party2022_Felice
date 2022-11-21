@@ -9,25 +9,44 @@
 <div th:replace="fragments/header :: header">header</div>
 
 <div class="container">
-<h1>Venue list</h1>
+    <h1>Venue list</h1>
     <div class="sublist">
         <p class=" menubutton2 ">Outdoor: </p>
-        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'yes' } ? buttonlookhighlight"  th:href="@{/venuelist/outdoor/yes}">Yes</a>
-        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'no' } ? buttonlookhighlight" th:href="@{/venuelist/outdoor/no}">No</a>
-        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'all' } ? buttonlookhighlight" th:href="@{/venuelist/outdoor/all}">All</a>
-    </div>
-    <div class="sublist2">
-        <p class=" menubutton2 ">Indoor: </p>
-        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'yes' } ? buttonlookhighlight"  th:href="@{/venuelist/indoor/yes}">Yes</a>
-        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'no' } ? buttonlookhighlight" th:href="@{/venuelist/indoor/no}">No</a>
-        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'all' } ? buttonlookhighlight" th:href="@{/venuelist/indoor/all}">All</a>
-    </div>
-<ul class="page buttonlist">
-    <li th:each="venue, iStat:${venues}">
-        <a th:href="@{|/venuedetailsbyid/*{iStat.index +1}|}" th:text="|${venue.getVenueName()}|" href="">venue name</a>
-    </li>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'all' } ? buttonlookhighlight"
+           th:href="@{/venuelist/outdoor/all}">All</a>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'yes' } ? buttonlookhighlight"
+           th:href="@{/venuelist/outdoor/yes}">Yes</a>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'no' } ? buttonlookhighlight"
+           th:href="@{/venuelist/outdoor/no}">No</a>
 
-</ul>
+    </div>
+    <div class="sublist">
+        <p class=" menubutton2 ">Indoor: </p>
+        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'all' } ? buttonlookhighlight"
+           th:href="@{/venuelist/indoor/all}">All</a>
+        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'yes' } ? buttonlookhighlight"
+           th:href="@{/venuelist/indoor/yes}">Yes</a>
+        <a class="buttonlook menubutton" th:classappend=" ${indoor == 'no' } ? buttonlookhighlight"
+           th:href="@{/venuelist/indoor/no}">No</a>
+    </div>
+    <div class="sublist">
+        <p class=" menubutton2 ">size: </p>
+        <a class="buttonlook menubutton" th:classappend=" ${size == 'all' } ? buttonlookhighlight"
+           th:href="@{/venuelist/size/all}">All</a>
+        <a class="buttonlook menubutton" th:classappend=" ${size == 's' } ? buttonlookhighlight"
+           th:href="@{/venuelist/size/S}">S</a>
+        <a class="buttonlook menubutton" th:classappend=" ${size == 'm' } ? buttonlookhighlight"
+           th:href="@{/venuelist/size/M}">M</a>
+        <a class="buttonlook menubutton" th:classappend=" ${size == 'l' } ? buttonlookhighlight"
+           th:href="@{/venuelist/size/L}">L</a>
+
+    </div>
+
+    <ul class="buttonlist">
+        <li th:each="venue, iStat:${venues}"><a th:href="@{|/venuedetailsbyid/*{venue.getId()}|}" th:text="|${venue.getVenueName()}|" href="">venue name</a></li>
+    </ul>
+
+    </ul>
 </div>
 </body>
 </html>

@@ -114,6 +114,22 @@ public class HomeController {
         return "venuelist";
     }
 
+    @GetMapping("venuelist/size/{size}")
+    public String venuelistsize(Model model, @PathVariable(required = false) String size) {
+        Iterable<Venue> venues = venueRepository.findAll();
+        if (size.equals("S")) {
+            venues = venueRepository.findByCapacityLessThan(200);
+        } else if (size.equals("M")) {
+            venues = venueRepository.findByCapacityBetween(199, 600);
+        } else if (size.equals("L")) {
+            venues = venueRepository.findByCapacityGreaterThanEqual(600);
+        }
+
+        model.addAttribute("venues", venues);
+        model.addAttribute("size", size);
+        return "venuelist";
+    }
+
     @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venuename}"})
     public String venuedetails(Model model, @PathVariable(required = false) String venuename) {
         model.addAttribute("venuename", venuename);
@@ -220,6 +236,5 @@ public class HomeController {
         model.addAttribute("nextIndex", nextIndex);
         return "venuedetailsbyindex";
     }
-
 
 }
