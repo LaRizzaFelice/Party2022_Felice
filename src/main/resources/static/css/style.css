@@ -26,6 +26,20 @@ p{
     text-decoration: none;
 }
 
+.buttonlookhighlight {
+
+    background-color: #888888;
+    color: white;
+    display: block;
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
 .container{
     width:80%;
     margin-left:auto;
@@ -36,6 +50,9 @@ p{
 .buttonlook:hover{
     background-color: deeppink;
 }
+
+
+
 
 .menubutton{
     float: left;

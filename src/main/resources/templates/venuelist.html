@@ -12,9 +12,9 @@
 <h1>Venue list</h1>
     <div class="sublist">
         <p class=" menubutton ">Outdoor: </p>
-        <a class="buttonlook menubutton"  th:href="@{/venuelist/outdoor/yes}">Yes</a>
-        <a class="buttonlook menubutton"  th:href="@{/venuelist/outdoor/no}">No</a>
-        <a class="buttonlook menubutton"  th:href="@{/venuelist/outdoor/all}">All</a>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'yes' } ? buttonlookhighlight"  th:href="@{/venuelist/outdoor/yes}">Yes</a>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'no' } ? buttonlookhighlight" th:href="@{/venuelist/outdoor/no}">No</a>
+        <a class="buttonlook menubutton" th:classappend=" ${outdoor == 'all' } ? buttonlookhighlight" th:href="@{/venuelist/outdoor/all}">All</a>
     </div>
 <ul class="page buttonlist">
     <li th:each="venue, iStat:${venues}">
