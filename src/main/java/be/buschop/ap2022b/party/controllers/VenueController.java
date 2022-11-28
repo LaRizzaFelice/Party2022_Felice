@@ -28,8 +28,9 @@ public class VenueController {
         return "venuedetails";
     }
 
-    @GetMapping({"/venuedetailsbyid", "/venuedetailsbyid/{id}"})
-    public String venueDetailsById(Model model, @PathVariable(required = false) Integer id) {
+    @GetMapping({"/venuedetailsbyid", "/venuedetailsbyid/", "/venuedetailsbyid/{venueid}"})
+    public String venuedetailsbyid(Model model,
+                                   @PathVariable(required = false) String venueid) {
 
         Optional oVenue = null;
         Venue venue = null;
@@ -38,31 +39,28 @@ public class VenueController {
 
         venueCount = (int) venueRepository.count();
 
-        if (id == null || id != (int) id) {
-            id = 0;
-        }
-        if (id <= 0 || id > venueCount) {
+        if (Integer.parseInt(venueid) <= 0 || Integer.parseInt(venueid) > venueCount) {
             idNull = true;
         }
 
-        oVenue = venueRepository.findById(id);
+        oVenue = venueRepository.findById(Integer.parseInt(venueid));
         if (oVenue.isPresent()) {
             venue = (Venue) oVenue.get();
         }
 
-        int prevId = id - 1;
+        int prevId = Integer.parseInt(venueid) - 1;
         if (prevId < 1) {
             prevId = venueCount;
         }
 
-        int nextId = id + 1;
+        int nextId = Integer.parseInt(venueid) + 1;
         if (nextId > venueCount) {
             nextId = 1;
         }
 
-        model.addAttribute("nextId", nextId);
-        model.addAttribute("prevId", prevId);
         model.addAttribute("venue", venue);
+        model.addAttribute("prevIndex", prevId);
+        model.addAttribute("nextIndex", nextId);
         model.addAttribute("idNull", idNull);
         return "venuedetailsbyid";
     }
