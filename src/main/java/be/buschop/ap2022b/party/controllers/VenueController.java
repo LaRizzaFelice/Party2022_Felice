@@ -22,15 +22,9 @@ public class VenueController {
         return "venuelist";
     }
 
-    @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venuename}"})
-    public String venuedetails(Model model, @PathVariable(required = false) String venuename) {
-        model.addAttribute("venuename", venuename);
-        return "venuedetails";
-    }
-
-    @GetMapping({"/venuedetailsbyid", "/venuedetailsbyid/", "/venuedetailsbyid/{venueid}"})
-    public String venuedetailsbyid(Model model,
-                                   @PathVariable(required = false) String venueid) {
+    @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venueid}"})
+    public String venuedetails(Model model,
+                               @PathVariable(required = false) String venueid) {
 
         Optional oVenue = null;
         Venue venue = null;
@@ -62,7 +56,7 @@ public class VenueController {
         model.addAttribute("prevIndex", prevId);
         model.addAttribute("nextIndex", nextId);
         model.addAttribute("idNull", idNull);
-        return "venuedetailsbyid";
+        return "venuedetails";
     }
     @GetMapping("venuelist/outdoor/{outdoor}")
     public String venuelistOutdoor (Model model, @PathVariable(required = false) String outdoor)
