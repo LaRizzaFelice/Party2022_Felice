@@ -70,7 +70,7 @@ public class HomeController {
         return "about";
     }
 
-    @GetMapping("/venuelist")
+    @GetMapping({"/venuelist", "/venuelist/{venuelist}"})
     public String venuelist(Model model) {
         Iterable<Venue> venues = venueRepository.findAll();
         model.addAttribute("venues", venues);
