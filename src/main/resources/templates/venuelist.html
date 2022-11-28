@@ -10,11 +10,12 @@
 
 <div class="container">
     <h1>Venue list</h1>
-
+    <a h1 class="buttonlook" th:if="${showFilters}">-</a>
+    <div th:if="${showFilters}" ><h1>Hier komen de filters!! </h1></div>
+    <a class="buttonlook" th:unless="${showFilters}" href="/venuelist/filter">Filter</a>
     <ul class="buttonlist">
         <li th:each="venue, iStat:${venues}"><a th:href="@{|/venuedetails/*{venue.getId()}|}" th:text="|${venue.getVenueName()}|" href="">venue name</a></li>
     </ul>
-
     </ul>
 </div>
 </body>

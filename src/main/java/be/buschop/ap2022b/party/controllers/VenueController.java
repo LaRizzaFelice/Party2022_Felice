@@ -14,11 +14,22 @@ import java.util.Optional;
 public class VenueController {
     @Autowired
     private VenueRepository venueRepository;
+    private boolean showFilters;
 
-    @GetMapping({"/venuelist/{venuelist}", "/venuelist"})
+    @GetMapping("/venuelist")
     public String venuelist(Model model) {
+        boolean showFilters = false;
         Iterable<Venue> venues = venueRepository.findAll();
         model.addAttribute("venues", venues);
+        model.addAttribute("showFilters",showFilters);
+        return "venuelist";
+    }
+    @GetMapping("/venuelist/filter")
+    public String filter(Model model) {
+        boolean showFilters = true;
+        Iterable<Venue> venues = venueRepository.findAll();
+        model.addAttribute("venues", venues);
+        model.addAttribute("showFilters",showFilters);
         return "venuelist";
     }
 
