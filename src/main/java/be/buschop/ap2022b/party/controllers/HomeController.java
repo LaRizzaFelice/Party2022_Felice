@@ -1,9 +1,5 @@
 package be.buschop.ap2022b.party.controllers;
 
-import be.buschop.ap2022b.party.repositories.ArtistRepository;
-import be.buschop.ap2022b.party.repositories.VenueRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
