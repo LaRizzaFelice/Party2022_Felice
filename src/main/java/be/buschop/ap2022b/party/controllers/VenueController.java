@@ -36,6 +36,9 @@ public class VenueController {
     @GetMapping("/venuelist/filter")
     public String filter(Model model,
                          @RequestParam(required = false) Integer minCapacity) {
+        if (minCapacity == null){
+            minCapacity = 0;
+        }
         logger.info(String.format("filter -- min=%d", minCapacity));
         boolean showFilters = true;
         Iterable<Venue> venues = venueRepository.findByCapacityGreaterThanEqual(minCapacity);
