@@ -13,5 +13,4 @@ public interface VenueRepository extends CrudRepository<Venue, Integer> {
     Iterable<Venue> findByCapacityGreaterThanEqual(int capacity);
 
 
-
 }

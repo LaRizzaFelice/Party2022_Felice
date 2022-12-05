@@ -17,6 +17,8 @@ public class Venue {
     private String city;
     private int distanceFromPublicTransportInKm;
 
+
+
     public Venue() {
 
     }
@@ -81,4 +83,6 @@ public class Venue {
     public int getId() {
         return id;
     }
+
+
 }

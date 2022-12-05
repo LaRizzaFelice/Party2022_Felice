@@ -20,8 +20,11 @@ public class VenueController {
     public String venuelist(Model model) {
         boolean showFilters = false;
         Iterable<Venue> venues = venueRepository.findAll();
+
         model.addAttribute("venues", venues);
         model.addAttribute("showFilters",showFilters);
+        model.addAttribute("showFilters",showFilters);
+        model.addAttribute("aantal", venueRepository.count());
         return "venuelist";
     }
     @GetMapping("/venuelist/filter")
@@ -30,6 +33,7 @@ public class VenueController {
         Iterable<Venue> venues = venueRepository.findAll();
         model.addAttribute("venues", venues);
         model.addAttribute("showFilters",showFilters);
+        model.addAttribute("aantal", venueRepository.count());
         return "venuelist";
     }
 
