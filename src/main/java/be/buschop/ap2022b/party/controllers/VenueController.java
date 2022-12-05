@@ -2,6 +2,8 @@ package be.buschop.ap2022b.party.controllers;
 
 import be.buschop.ap2022b.party.repositories.VenueRepository;
 import be.buschop.ap2022b.party.model.Venue;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ public class VenueController {
     @Autowired
     private VenueRepository venueRepository;
     private boolean showFilters;
+    private Logger logger = LoggerFactory.getLogger(VenueController.class);
 
     @GetMapping("/venuelist")
     public String venuelist(Model model) {
@@ -29,11 +32,12 @@ public class VenueController {
     }
     @GetMapping("/venuelist/filter")
     public String filter(Model model) {
+        logger.info("filter");
         boolean showFilters = true;
         Iterable<Venue> venues = venueRepository.findAll();
         model.addAttribute("venues", venues);
         model.addAttribute("showFilters",showFilters);
-        model.addAttribute("aantal", venueRepository.count());
+        model.addAttribute("aantal",venueRepository.count());
         return "venuelist";
     }
 
