@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import java.util.Optional;
 
 
@@ -25,25 +27,26 @@ public class VenueController {
         Iterable<Venue> venues = venueRepository.findAll();
 
         model.addAttribute("venues", venues);
-        model.addAttribute("showFilters",showFilters);
-        model.addAttribute("showFilters",showFilters);
+        model.addAttribute("showFilters", showFilters);
+        model.addAttribute("showFilters", showFilters);
         model.addAttribute("aantal", venueRepository.count());
         return "venuelist";
     }
+
     @GetMapping("/venuelist/filter")
-    public String filter(Model model) {
-        logger.info("filter");
+    public String filter(Model model,
+                         @RequestParam(required = false) Integer minCapacity) {
+        logger.info(String.format("filter -- min=%d", minCapacity));
         boolean showFilters = true;
-        Iterable<Venue> venues = venueRepository.findAll();
+        Iterable<Venue> venues = venueRepository.findByCapacityGreaterThanEqual(minCapacity);
         model.addAttribute("venues", venues);
-        model.addAttribute("showFilters",showFilters);
-        model.addAttribute("aantal",venueRepository.count());
+        model.addAttribute("showFilters", showFilters);
+        model.addAttribute("aantal", venueRepository.count());
         return "venuelist";
     }
 
     @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venueid}"})
-    public String venuedetails(Model model,
-                               @PathVariable(required = false) String venueid) {
+    public String venuedetails(Model model, @PathVariable(required = false) String venueid) {
 
         Optional oVenue = null;
         Venue venue = null;
