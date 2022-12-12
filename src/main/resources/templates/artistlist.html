@@ -7,7 +7,17 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">header</div>
-<div class="container"><h1>Artist list</h1>
+<div class="container">
+    <h1>Artist list</h1>
+    <div th:if="${showFilters}"><h1>Hier komen de filters!! </h1>
+        <form>
+            <div><input type="submit" value="search"></div>
+            <h3>Artist Name</h3>
+            <div><label for="artistName" l>Artist name</label> <input type="text" id="artistName" name="artistName"
+                                                                      value=""></input></div>
+        </form>
+    </div>
+    <a class="buttonlook" th:unless="${showFilters}" href="/artistlist/filter">Filter</a>
     <ul class="buttonlist">
         <li th:each="artist, iStat:${artists}"><a th:href="@{|/artistdetailsbyid/*{iStat.index +1}|}"
                                                   th:text="|${artist.getArtistName()}|" href="">artist name</a></li>
