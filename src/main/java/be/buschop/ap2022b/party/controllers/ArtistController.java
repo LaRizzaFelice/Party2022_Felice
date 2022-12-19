@@ -30,8 +30,7 @@ public class ArtistController {
         Iterable<Artist> artists = null;
         if (artistName == null || artistName == "")
         {
-            //artists = artistRepository.findAll();
-            artists = artistRepository.findByArtistName(artistName);
+            artists = artistRepository.findAll();
         }
         else{
             artists = artistRepository.findByArtistName(artistName);
