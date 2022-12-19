@@ -28,7 +28,7 @@ public class ArtistController {
     @GetMapping("/artistlist/filter")
     public String filter (Model model,@RequestParam(required = false) String artistName){
         Iterable<Artist> artists = null;
-        if (artistName == null)
+        if (artistName == null || artistName == "")
         {
             artists = artistRepository.findAll();
         }

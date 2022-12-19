@@ -45,7 +45,7 @@ public class VenueController {
         logger.info(String.format("filter -- min=%d", minCapacity));
         logger.info(String.format("filter -- min=%d", maxCapacity));
         boolean showFilters = true;
-        Iterable<Venue> venues = venueRepository.findByCapacityBetween(minCapacity, maxCapacity);
+        Iterable<Venue> venues = venueRepository.findByCapacityBetween(minCapacity,maxCapacity);
         model.addAttribute("venues", venues);
         model.addAttribute("showFilters", showFilters);
         model.addAttribute("aantal", venueRepository.count());
