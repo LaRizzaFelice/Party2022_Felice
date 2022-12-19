@@ -28,4 +28,6 @@ public interface VenueRepository extends CrudRepository<Venue, Integer> {
     List<Venue> findByCapacityBetweenQuery(int min, int max);
 
 
+
+
 }

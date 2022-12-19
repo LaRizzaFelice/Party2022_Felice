@@ -30,10 +30,11 @@ public class ArtistController {
         Iterable<Artist> artists = null;
         if (artistName == null || artistName == "")
         {
-            artists = artistRepository.findAll();
+            //artists = artistRepository.findAll();
+            artists = artistRepository.findByArtistName(artistName);
         }
         else{
-            artists = artistRepository.findArtistByArtistNameContainingIgnoreCase(artistName);
+            artists = artistRepository.findByArtistName(artistName);
         }
         boolean showFilters = true;
         model.addAttribute("artists",artists);
