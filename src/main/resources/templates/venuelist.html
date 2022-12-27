@@ -21,59 +21,59 @@
             <h3>capacity</h3>
             <div>
                 <label for="minCapacity" >min</label>
-                <input type="number" id="minCapacity" name="minCapacity" value="0" step="50">persons</input>
+                <input type="number" id="minCapacity" name="minCapacity" th:value="${minCapacity}" value="0" step="50">persons</input>
             </div>
             <div>
                 <label for="maxCapacity" >max</label>
-                <input type="number" id="maxCapacity" name="maxCapacity" value="0" step="50">persons</input>
+                <input type="number" id="maxCapacity" name="maxCapacity" th:value="${maxCapacity}" value="0" step="50">persons</input>
             </div>
             <h3>Distance from public transport</h3>
             <div>
                 <label for="maxDistance" >max</label>
-                <input type="number" id="maxDistance" name="maxDistance" value="0" step="1">km</input>
+                <input type="number" id="maxDistance" name="maxDistance" value="1" th:value="${maxDistance} ? ${maxDistance} : ''" step="1"> km
             </div>
             <div>
                 <h3>Food</h3>
                 <div>
                     <label for="foodProvided" >yes</label>
-                    <input type="radio" id="foodProvided" name="foodProvided" value="true"></input>
+                    <input type="radio" id="foodProvided" name="foodProvided" value="true" th:checked="${foodProvided=='true'}"></input>
                 </div>
                 <div>
                     <label for="foodProvided1" >no</label>
-                    <input type="radio" id="foodProvided1" name="foodProvided" value="false"></input>
+                    <input type="radio" id="foodProvided1" name="foodProvided" value="false" th:checked="${foodProvided=='false'}"></input>
                 </div>
                 <div>
                     <label for="foodProvided2" >all</label>
-                    <input type="radio" id="foodProvided2" name="foodProvided"></input>
+                    <input type="radio" id="foodProvided2" name="foodProvided" value="false && true" th:checked="${foodProvided=='false' && 'true'}"> </input>
                 </div>
             </div>
             <div>
                 <h3>Indoor</h3>
                 <div>
                     <label for="indoor" >yes</label>
-                    <input type="radio" id="indoor" name="indoor" value="true"></input>
+                    <input type="radio" id="indoor" name="indoor" value="true" th:checked="${indoor=='true'}"></input>
                 </div>
                 <div>
                     <label for="indoor" >no</label>
-                    <input type="radio" id="indoor1" name="indoor" value="false"></input>
+                    <input type="radio" id="indoor1" name="indoor" value="false" th:checked="${indoor=='false'}"></input>
                 </div>
                 <div>
-                    <label for="foodProvided2" >all</label>
-                    <input type="radio" id="indoor2" name="foodProvided"></input>
+                    <label for="indoor" >all</label>
+                    <input type="radio" id="indoor2" name="indoor" value="false && true" th:checked="${indoor=='false' && 'true'}"></input>
                 </div>
                 <div>
                     <h3>Outdoor</h3>
                     <div>
                         <label for="outdoor" >yes</label>
-                        <input type="radio" id="outdoor" name="outdoor" value="true"></input>
+                        <input type="radio" id="outdoor" name="outdoor" value="true" th:checked="${outdoor=='true'}"></input>
                     </div>
                     <div>
                         <label for="foodProvided1" >no</label>
-                        <input type="radio" id="outdoor1" name="outdoor" value="false"></input>
+                        <input type="radio" id="outdoor1" name="outdoor" value="false" th:checked="${outdoor=='false'}"></input>
                     </div>
                     <div>
-                        <label for="foodProvided2" >all</label>
-                        <input type="radio" id="outdoor2" name="outdoor"></input>
+                        <label for="outdoor" >all</label>
+                        <input type="radio" id="outdoor2" name="outdoor" value="false && true" th:checked="${outdoor=='false' && 'true'}"></input>
                     </div>
                 </div>
             </div>
