@@ -9,7 +9,7 @@
 <div th:replace="fragments/header :: header">header</div>
 
 <div class="container">
-    <h1>About</h1>
+    <h1>Partylist</h1>
     <div th:each="party:${parties}">
         <a class="buttonLook mediumButton" th:href="@{|/partydetails/${party.id}|}">
             <span th:text="${party.name}">venue name</span>

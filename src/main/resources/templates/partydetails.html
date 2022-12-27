@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>About page</title>
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}" href="../static/css/style.css"/>
 </head>
 <body>
-<div th:replace="fragments/header :: header">Header</div>
+<div th:replace="fragments/header :: header">header</div>
 
 
 <div class="row1">
@@ -38,8 +39,8 @@
             <div th:if="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
                 <div>price:</div>
 
-                <div>
-                     th:text="|${party.pricePresaleInEur}&euro; (presale) / ${party.priceInEur}&euro;|">
+                <div
+                    th:text="|${party.pricePresaleInEur}&euro; (presale) / ${party.priceInEur}&euro;|">
                     pricePresaleInEur and price
                 </div>
             </div>
@@ -54,9 +55,8 @@
         </div>
 
     </div>
-    <div class="row1content" th:unless="${party}">
+    <div th:unless="${party}">
         <p>no party was chosen</p>
     </div>
 </div>
-</body>
 </html>
