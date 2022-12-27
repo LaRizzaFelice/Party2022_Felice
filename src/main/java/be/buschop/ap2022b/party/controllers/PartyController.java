@@ -23,4 +23,6 @@ public class PartyController {
         model.addAttribute("parties", parties);
         return "partylist";
     }
+
+
 }
