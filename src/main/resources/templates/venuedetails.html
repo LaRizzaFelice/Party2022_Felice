@@ -38,16 +38,15 @@
     <div class="containerbelow">
         <h1 class="container"  th:text="|Parties in ${venue.venueName}|">parties in this venue</h1>
 
-        <div class="venuelist">
-            <div th:each="party:${parties}">
+        <ul class="buttonlist">
+            <li th:each="party:${parties}">
                 <a class="container" th:href="@{|/partydetails/${party.id}|}">
                     <span th:text="${party.name}">venue name </span>
                 </a>
-            </div>
-        </div>
+            </li>
+        </ul>
+
     </div>
 </div>
-<h1 th:if="${idNull}"> No valid venue is chosen</h1>
-
 </body>
 </html>

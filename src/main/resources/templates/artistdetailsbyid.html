@@ -21,7 +21,6 @@
     <p th:text="${artist.getLinkMoreInfo()}">Link more info</p>
     <p th:text="${artist.getPortfolio()}">Portfolio</p></div>
 <p th:unless="${artist}">No valid artist is chosen</p>
-<p th:if="${artist}">No valid artist is chosen</p>
 <div th:if="${artist}" class="border"><a class="nextprev" href="#" th:href="@{|/artistdetailsbyid/${nextId}|}">&gt;</a>
 </div>
 </body>
