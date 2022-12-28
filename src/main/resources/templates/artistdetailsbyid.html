@@ -15,7 +15,8 @@
     <p>genre:</p>
     <p>link more info:</p>
     <p>portfolio:</p></div>
-<div th:if="${artist}" class="rechtercontainer"><p th:text="${artist.getArtistName()}"> artist naam</p>
+<div th:if="${artist}" class="rechtercontainer">
+    <p th:text="${artist.getArtistName()}"> artist naam</p>
     <p th:text="${artist.getBio()}">Bio</p>
     <p th:text="${artist.getGenre()}">Genre</p>
     <p th:text="${artist.getLinkMoreInfo()}">Link more info</p>

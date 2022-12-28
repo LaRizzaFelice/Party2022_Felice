@@ -8,26 +8,18 @@
 <body>
 <div th:replace="fragments/header :: header">header</div>
 <div class="border"><a th:href="@{|/animaldetails.html/${animal.id}/prev|}" href="#" class="nextprev">&lt;</a></div>
-
-<div class="row1">
-  <div class="row1content" th:if="${animal}">
-
-    <h1 th:text="${animal.name}">animaldetails</h1>
-
-    <h1>
-      <span th:text="${party.date}">date</span>
-    </h1>
-    <div class="linkercontainer">
+<div th:if="${animal}" class="container"><h1 th:text="${animal.name}">animaldetails</h1>
+  <div th:if="${animal}" class="linkercontainer">
       <p>city:</p>
       <p>bio:</p>
     </div>
 
-    <div class="rechtercontainer">
+  <div th:if="${animal}" class="rechtercontainer">
       <p th:text="${animal.city}">city</p>
       <p th:text="${animal.bio}">bio</p>
 
     </div>
-    <div class="border"><a th:href="@{|/animaldetails/${animal.id}/next|}" href="#" class="nextprev">&gt;</a>
+    <div th:if="${animal}" class="border"><a th:href="@{|/animaldetails/${animal.id}/next|}" href="#" class="nextprev">&gt;</a>
     </div>
   </div>
   <div class="container">
@@ -42,6 +34,5 @@
       </ul>
     </div>
   </div>
-</div>
 </body>
 </html>
