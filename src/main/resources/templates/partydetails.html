@@ -38,18 +38,32 @@
         <div class="border"><a th:href="@{|/partydetails/${party.id}/next|}" href="#" class="nextprev">&gt;</a>
         </div>
     </div>
-    <div class="container">
-        <div class="containerbelow">
-            <h1 class="container">line up:</h1>
-            <ul class="buttonlist">
-                <li th:each="artist:${party.artists}">
-                    <a class="container" th:href="@{|/artistdetailsbyid/${artist.id}|}">
-                        <span th:text="${artist.getArtistName()}">artist name </span>
-                    </a>
-                </li>
-            </ul>
-        </div>
+<div class="container">
+    <div class="containerbelow">
+        <h1 class="container">line up:</h1>
+        <ul class="buttonlist">
+            <li th:each="artist:${party.artists}">
+                <a class="container" th:href="@{|/artistdetailsbyid/${artist.id}|}">
+                    <span th:text="${artist.getArtistName()}">artist name </span>
+                </a>
+            </li>
+        </ul>
     </div>
+</div>
+</div>
+</div>
+<div class="container">
+    <div class="containerbelow">
+        <h1 class="container">who goes?</h1>
+        <ul class="buttonlist">
+            <li th:each="animal:${party.animals}">
+                <a class="container" th:href="@{|/animaldetails/${animal.id}|}">
+                    <span th:text="${animal.name}">animal name </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
 </div>
 </body>
 </html>
