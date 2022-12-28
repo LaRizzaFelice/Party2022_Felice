@@ -10,11 +10,13 @@
 
 <div class="container">
     <h1>Partylist</h1>
-    <div th:each="party:${parties}">
-        <a class="buttonLook mediumButton" th:href="@{|/partydetails/${party.id}|}">
-            <span th:text="${party.name}">venue name</span>
+
+    <ul class="buttonlist">
+        <li th:each="party:${parties}">
+        <a th:href="@{|/partydetails/${party.id}|}">
+            <span th:text="${party.name}">Venue name </span>
         </a>
-    </div>
+    </ul>
 </div>
 </body>
 </html>

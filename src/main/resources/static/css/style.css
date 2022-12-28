@@ -47,6 +47,13 @@ p{
     float: left;
 }
 
+.containerbelow{
+    width:88%;
+    margin-left:auto;
+    margin-right: auto;
+    float: right;
+}
+
 .buttonlook:hover{
     background-color: deeppink;
 }
@@ -133,6 +140,8 @@ p{
     float:left;
     width:50%;
 }
+
+
 
 .sublist{
     height: 45px;

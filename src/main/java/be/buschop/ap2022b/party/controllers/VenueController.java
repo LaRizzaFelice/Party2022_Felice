@@ -1,5 +1,7 @@
 package be.buschop.ap2022b.party.controllers;
 
+import be.buschop.ap2022b.party.model.Party;
+import be.buschop.ap2022b.party.repositories.PartyRepository;
 import be.buschop.ap2022b.party.repositories.VenueRepository;
 import be.buschop.ap2022b.party.model.Venue;
 import org.slf4j.Logger;
@@ -19,6 +21,11 @@ import java.util.Optional;
 public class VenueController {
     @Autowired
     private VenueRepository venueRepository;
+
+    @Autowired
+    private PartyRepository partyRepository;
+
+
     private boolean showFilters;
     private Logger logger = LoggerFactory.getLogger(VenueController.class);
 
@@ -86,6 +93,9 @@ public class VenueController {
             nextId = 1;
         }
 
+        Iterable<Party> parties = partyRepository.findByVenue((Venue) oVenue.get());
+
+        model.addAttribute("parties", parties);
         model.addAttribute("venue", venue);
         model.addAttribute("prevIndex", prevId);
         model.addAttribute("nextIndex", nextId);
