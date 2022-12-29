@@ -33,6 +33,17 @@
       <p th:unless="${!party.extraInfo.isBlank()}"> No extra info available</p>
       <p th:text="${party.extraInfo}">extraInfo</p>
     </div>
+    <div class="container">
+      <div class="containerbelow">
+        <h1 class="container">Cancel party:</h1>
+        <ul class="buttonlist">
+          <li>
+            <a class="container" th:href="@{|/partydetails/${party.id}|}">CANCEL
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </div>
 </div>
