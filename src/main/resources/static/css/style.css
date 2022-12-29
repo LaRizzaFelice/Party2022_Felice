@@ -61,7 +61,11 @@ p{
 .menubutton{
     float: left;
     margin-left: 10px;
+}
 
+.imagehomepage{
+    position: relative;
+    left: 80px;
 
 }
 
@@ -149,4 +153,16 @@ p{
 
 .sublist2{
     height: 45px;
+}
+
+.editButton {
+    font-size: 1.2em;
+    padding: 1em;
+    background-color: #C6AE82;
+    color: #4c6c5d;
+}
+
+.editButtonDiv {
+    position: absolute;
+    right: 60px;
 }
