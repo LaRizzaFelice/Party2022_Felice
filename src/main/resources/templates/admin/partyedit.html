@@ -21,7 +21,8 @@
       <p>price:</p>
       <p>where:</p>
       <p>doors:</p>
-      <p>extraInfo</p></div>
+      <p>extraInfo</p>
+      <p>name:</p></div>
 
     <div class="rechtercontainer">
       <p th:unless="${party.pricePresaleInEur!=null || party.priceInEur!=null}"> Free Party!</p>
@@ -32,6 +33,22 @@
       <p th:text="${party.doors}">date</p>
       <p th:unless="${!party.extraInfo.isBlank()}"> No extra info available</p>
       <p th:text="${party.extraInfo}">extraInfo</p>
+      <form th:action="@{|/admin/partyedit/${party.id}|}" method="post">
+        <input th:value="${party.name}" type="text" name="partyName">
+        <input type="text" id="fname" name="fname">
+
+      </form>
+    </div>
+    <div class="container">
+      <div class="containerbelow">
+        <h1 class="container">Save party:</h1>
+        <ul class="buttonlist">
+          <li>
+            <a class="container" th:href="@{|/partydetails/${party.id}|}">SAVE
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="container">
       <div class="containerbelow">
