@@ -7,37 +7,55 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">header</div>
-<div th:if="${artist}" class="border"><a class="nextprev" href="#" th:href="@{|/artistdetailsbyid/${prevId}|}">&lt;</a>
-</div>
-<div th:if="${artist}" class="container"><h1 th:text="${artist.getArtistName()}">ArtistTitle</h1></div>
-<div th:if="${artist}" class="linkercontainer"><p>naam artist:</p>
-    <p>bio:</p>
-    <p>genre:</p>
-    <p>link more info:</p>
-    <p>portfolio:</p></div>
-<div th:if="${artist}" class="rechtercontainer">
-    <p th:text="${artist.getArtistName()}"> artist naam</p>
-    <p th:text="${artist.getBio()}">Bio</p>
-    <p th:text="${artist.getGenre()}">Genre</p>
-    <p th:text="${artist.getLinkMoreInfo()}">Link more info</p>
-    <p th:text="${artist.getPortfolio()}">Portfolio</p></div>
-<p th:unless="${artist}">No valid artist is chosen</p>
-<div th:if="${artist}" class="border"><a class="nextprev" href="#" th:href="@{|/artistdetailsbyid/${nextId}|}">&gt;</a>
-</div>
-</div>
-<div class="container">
-    <div class="containerbelow">
-        <h1 class="container"th:text="|Parties by ${artist.artistName}|">parties by artist</h1>
-        <ul class="buttonlist">
-            <li th:each="party:${artist.parties}">
-                <a class="container" th:href="@{|/partydetails/${party.id}|}">
-                    <span th:text="${party.name}">venue name</span>
+<div class="row1">
+    <div class="row1content" th:if="${artist}">
 
-                </a>
-            </li>
-        </ul>
+        <div class="prevButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{|/artistdetails/${prevId}|}">&lt;</a>
+        </div>
+        <div class="nextButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{|/artistdetails/${nextId}|}">&gt;</a>
+        </div>
+
+        <h2 th:text="${artist.artistName}">artistdetails</h2>
+        <div class="venueinfo">
+            <div class="infoLine">
+                <div class="infoLineName">info:</div>
+                <div class="infoLineValue">
+                    <a th:href="${artist.linkMoreInfo}" th:text="${artist.linkMoreInfo}" class="linkLook" target="_blank">linkMoreIfo</a>
+                </div>
+            </div>
+            <div class="infoLine">
+                <div class="infoLineName">genre:</div>
+                <div class="infoLineValue" th:text="${artist.genre}">genre</div>
+            </div>
+            <div class="infoLine">
+                <div class="infoLineName">portfolio:</div>
+                <div class="infoLineValue" th:text="${artist.portfolio}">portfolio</div>
+            </div>
+            <div class="infoLine">
+                <div class="infoLineName">bio:</div>
+                <div class="infoLineValue" th:text="${artist.bio}"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row1content" th:unless="${artist}">
+        <p>no artist was chosen</p>
     </div>
 </div>
+<div class="row1" th:if="${artist}">
+    <div class="row1content">
+        <h2  th:text="|parties by ${artist.artistName}|">parties by artist</h2>
+
+        <div class="venuelist">
+            <div th:each="party:${artist.parties}">
+                <a class="buttonLook mediumButton" th:href="@{|/partydetails/${party.id}|}">
+                    <span th:text="${party.name}">venue name </span>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
