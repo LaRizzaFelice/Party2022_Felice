@@ -2,6 +2,8 @@ package be.buschop.ap2022b.party.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Date;
 
@@ -19,11 +21,14 @@ public class Party {
     private String extraInfo;
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @NotNull
     private Date date;
     @Temporal(TemporalType.TIME)
     @DateTimeFormat(pattern = "HH:mm")
+    @NotNull
     private Date doors;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY, optional=false)
     private Venue venue;
 
     @ManyToMany(fetch = FetchType.LAZY)

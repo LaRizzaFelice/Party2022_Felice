@@ -22,7 +22,8 @@
             <div class="infoLine">
                 <div class="infoLineName">info:</div>
                 <div class="infoLineValue">
-                    <a th:href="${artist.linkMoreInfo}" th:text="${artist.linkMoreInfo}" class="linkLook" target="_blank">linkMoreIfo</a>
+                    <a th:href="${artist.linkMoreInfo}" th:text="${artist.linkMoreInfo}" class="linkLook"
+                       target="_blank">linkMoreIfo</a>
                 </div>
             </div>
             <div class="infoLine">
@@ -46,7 +47,7 @@
 </div>
 <div class="row1" th:if="${artist}">
     <div class="row1content">
-        <h2  th:text="|parties by ${artist.artistName}|">parties by artist</h2>
+        <h2 th:text="|parties by ${artist.artistName}|">parties by artist</h2>
 
         <div class="venuelist">
             <div th:each="party:${artist.parties}">

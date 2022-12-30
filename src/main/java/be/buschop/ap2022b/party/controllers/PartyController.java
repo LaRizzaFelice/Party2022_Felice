@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Controller
 public class PartyController {
-    private final Logger logger = LoggerFactory.getLogger(PartyController.class);
+    private Logger logger = LoggerFactory.getLogger(PartyController.class);
 
     @Autowired
     private PartyRepository partyRepository;
@@ -34,36 +34,12 @@ public class PartyController {
 
         Optional<Party> optionalParty = partyRepository.findById(id);
         if (optionalParty.isPresent()) {
-            long nrOfPartys = partyRepository.count();
+            long nrOfParties = partyRepository.count();
             model.addAttribute("party", optionalParty.get());
-            model.addAttribute("prevId", id > 1 ? id - 1 : nrOfPartys);
-            model.addAttribute("nextId", id < nrOfPartys ? id + 1 : 1);
+            model.addAttribute("prevId", id > 1 ? id - 1 : nrOfParties);
+            model.addAttribute("nextId", id < nrOfParties ? id + 1 : 1);
         }
         return "partydetails";
     }
-
-    @GetMapping({"/partydetails/{id}/prev"})
-    public String partydetailsPrev(Model model, @PathVariable int id) {
-        Optional<Party> prevPartyFromDb = partyRepository.findFirstByIdLessThanOrderByIdDesc(id);
-        if (prevPartyFromDb.isPresent())
-            return String.format("redirect:/partydetails/%d", prevPartyFromDb.get().getId());
-        Optional<Party> lastPartyFromDb = partyRepository.findFirstByOrderByIdDesc();
-        if (lastPartyFromDb.isPresent())
-            return String.format("redirect:/partydetails/%d", lastPartyFromDb.get().getId());
-        return "partydetails";
-    }
-
-    @GetMapping({"/partydetails/{id}/next"})
-    public String partydetailsNext(Model model, @PathVariable int id) {
-        Optional<Party> nextPartyFromDb = partyRepository.findFirstByIdGreaterThanOrderByIdAsc(id);
-        if (nextPartyFromDb.isPresent())
-            return String.format("redirect:/partydetails/%d", nextPartyFromDb.get().getId());
-        Optional<Party> firstPartyFromDb = partyRepository.findFirstByOrderByIdAsc();
-        if (firstPartyFromDb.isPresent())
-            return String.format("redirect:/partydetails/%d", firstPartyFromDb.get().getId());
-        return "partydetails";
-    }
-
-
 
 }

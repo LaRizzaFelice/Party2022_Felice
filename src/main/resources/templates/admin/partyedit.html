@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
   <title>About page</title>
@@ -26,7 +26,7 @@
       <div class="venueinfo">
         <div class="infoLine">
           <label for="partyName" class="infoLineName">name: </label>
-          <input id="partyName" th:field="*{name}" class="infoLineValue"  th:errorclass="fieldError">
+          <input id="partyName" th:field="*{name}" class="infoLineValue" th:errorclass="fieldError">
         </div>
         <div class="infoLine">
           <label for="venue" class="infoLineName">venue: </label>
@@ -39,7 +39,7 @@
         </div>
         <div class="infoLine">
           <label for="date" class="infoLineName">date <i>(dd/mm/yyyy)</i>: </label>
-          <input id="date" th:field="*{date}" class="infoLineValue">
+          <input id="date" th:field="*{date}" class="infoLineValue" th:errorclass="fieldError">
         </div>
         <div class="infoLine" th:unless="*{pricePresaleInEur!=null || priceInEur!=null}">
           Free Party!
@@ -56,11 +56,12 @@
         </div>
         <div class="infoLine">
           <label for="extraInfo" class="infoLineName">extra info: </label>
-          <input id="extraInfo" th:field="*{extraInfo}" class="infoLineValue">
+          <textarea id="extraInfo" th:field="*{extraInfo}" cols="25"
+                    class="infoLineValue">extraInfo</textarea>
         </div>
         <div class="infoLine">
           <label for="doors" class="infoLineName">doors <i>(HH:mm)</i>: </label>
-          <input id="doors" th:field="*{doors}" class="infoLineValue">
+          <input id="doors" th:field="*{doors}" class="infoLineValue" th:errorclass="fieldError">
         </div>
 
         <div class="infoLine">
@@ -81,6 +82,24 @@
         <div class="infoLine" th:if="*{!extraInfo.isBlank()}">
           <div class="infoLineName">extraInfo</div>
           <div class="infoLineValue" th:text="*{extraInfo}">extraInfo</div>
+        </div>
+        <div class="infoLine">
+          <label class="infoLineName">artists: </label>
+          <div class="infoLineValue">
+                        <span th:each="artist,stats:*{artists}" th:text="|${artist.artistName}${stats.last?'':','} |">
+                            artist
+                        </span>
+          </div>
+        </div>
+        <div class="infoLine">
+          <label for="artists" class="infoLineName"></label>
+          <select multiple id="artists" name="artistIds" class="infoLineValue">
+            <option value=""></option>
+            <option th:each="artist:${artists}" value="one artist id" th:value="${artist.id}"
+                    th:text="${artist.artistName}" th:selected="${party.artists.contains(artist)}">
+              one artist
+            </option>
+          </select>
         </div>
         <div class="infoLine">
           <a th:href="@{|/partydetails/*{id}|}" class="buttonLook editButton">cancel</a>

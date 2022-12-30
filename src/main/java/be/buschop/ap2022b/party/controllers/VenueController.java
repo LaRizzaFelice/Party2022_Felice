@@ -19,87 +19,71 @@ import java.util.Optional;
 
 @Controller
 public class VenueController {
+    private Logger logger = LoggerFactory.getLogger(VenueController.class);
+
     @Autowired
     private VenueRepository venueRepository;
 
     @Autowired
     private PartyRepository partyRepository;
 
+    @GetMapping({"/venuedetails", "/venuedetails/{id}"})
+    public String venueDetails(Model model,
+                               @PathVariable(required = false) Integer id) {
+        if (id == null) return "venuedetails";
 
-    private boolean showFilters;
-    private Logger logger = LoggerFactory.getLogger(VenueController.class);
-
-    @GetMapping("/venuelist")
-    public String venuelist(Model model) {
-        boolean showFilters = false;
-        Iterable<Venue> venues = venueRepository.findAll();
-
-        model.addAttribute("venues", venues);
-        model.addAttribute("showFilters", showFilters);
-        model.addAttribute("showFilters", showFilters);
-        model.addAttribute("aantal", venueRepository.count());
-        return "venuelist";
-    }
-
-    @GetMapping("/venuelist/filter")
-    public String filter(Model model,
-                         @RequestParam(required = false) Integer minCapacity, Integer maxCapacity, Integer maxDistance, Boolean foodProvided, Boolean indoor, Boolean outdoor ){
-        if (minCapacity == null){
-            minCapacity = 0;
+        Optional<Venue> optionalVenue = venueRepository.findById(id);
+        if (optionalVenue.isPresent()) {
+            long nrOfVenues = venueRepository.count();
+            Iterable<Party> parties = partyRepository.findByVenue(optionalVenue.get());
+            model.addAttribute("venue", optionalVenue.get());
+            model.addAttribute("prevId", id > 1 ? id - 1 : nrOfVenues);
+            model.addAttribute("nextId", id < nrOfVenues ? id + 1 : 1);
+            model.addAttribute("parties", parties);
         }
-        if (maxCapacity == null){
-            maxCapacity = 0;
-        }
-
-        if (maxDistance == null){
-            maxDistance = 0;
-        }
-        logger.info(String.format("filter -- min=%d", minCapacity));
-        logger.info(String.format("filter -- min=%d", maxCapacity));
-        boolean showFilters = true;
-        Iterable<Venue> venues = venueRepository.findByFilter(minCapacity,maxCapacity,maxDistance, foodProvided, indoor, outdoor);
-        model.addAttribute("venues", venues);
-        model.addAttribute("showFilters", showFilters);
-        model.addAttribute("aantal", venueRepository.count());
-        return "venuelist";
-    }
-
-    @GetMapping({"/venuedetails", "/venuedetails/", "/venuedetails/{venueid}"})
-    public String venuedetails(Model model, @PathVariable(required = false) String venueid) {
-
-        Optional oVenue = null;
-        Venue venue = null;
-        int venueCount = 0;
-        boolean idNull = false;
-
-        venueCount = (int) venueRepository.count();
-
-        if (Integer.parseInt(venueid) <= 0 || Integer.parseInt(venueid) > venueCount) {
-            idNull = true;
-        }
-
-        oVenue = venueRepository.findById(Integer.parseInt(venueid));
-        if (oVenue.isPresent()) {
-            venue = (Venue) oVenue.get();
-        }
-
-        int prevId = Integer.parseInt(venueid) - 1;
-        if (prevId < 1) {
-            prevId = venueCount;
-        }
-
-        int nextId = Integer.parseInt(venueid) + 1;
-        if (nextId > venueCount) {
-            nextId = 1;
-        }
-
-        Iterable<Party> parties = partyRepository.findByVenue((Venue) oVenue.get());
-
-        model.addAttribute("parties", parties);
-        model.addAttribute("venue", venue);
-        model.addAttribute("prevIndex", prevId);
-        model.addAttribute("nextIndex", nextId);
-        model.addAttribute("idNull", idNull);
         return "venuedetails";
     }
+
+    @GetMapping({"/venuelist"})
+    public String venueList(Model model) {
+        logger.info("venueList");
+        Iterable<Venue> venues = venueRepository.findAll();
+        long nrOfVenues = venueRepository.count();
+        model.addAttribute("venues", venues);
+        model.addAttribute("nrOfVenues", nrOfVenues);
+        model.addAttribute("showFilters", false);
+        return "venuelist";
+    }
+
+    @GetMapping({"/venuelist/filter"})
+    public String venueListWithFilter(Model model,
+                                      @RequestParam(required = false) Integer minCapacity,
+                                      @RequestParam(required = false) Integer maxCapacity,
+                                      @RequestParam(required = false) Integer maxDistance,
+                                      @RequestParam(required = false) String filterFood,
+                                      @RequestParam(required = false) String filterIndoor,
+                                      @RequestParam(required = false) String filterOutdoor) {
+        logger.info(String.format("venueListWithFilter -- min=%d, max=%d, distance=%d, filterFood=%s, filterIndoor=%s, , filterOutdoor=%s",
+                minCapacity, maxCapacity, maxDistance, filterFood, filterIndoor, filterIndoor));
+
+        List<Venue> venues = venueRepository.findByFilter(minCapacity, maxCapacity, maxDistance,
+                filterStringToBoolean(filterFood), filterStringToBoolean(filterIndoor), filterStringToBoolean(filterOutdoor));
+
+        model.addAttribute("venues", venues);
+        model.addAttribute("nrOfVenues", venues.size());
+        model.addAttribute("showFilters", true);
+        model.addAttribute("minCapacity", minCapacity);
+        model.addAttribute("maxCapacity", maxCapacity);
+        model.addAttribute("maxDistance", maxDistance);
+        model.addAttribute("filterFood", filterFood);
+        model.addAttribute("filterIndoor", filterIndoor);
+        model.addAttribute("filterOutdoor", filterOutdoor);
+
+        return "venuelist";
+    }
+
+    private Boolean filterStringToBoolean(String filterString) {
+        return (filterString == null || filterString.equals("all")) ? null : filterString.equals("yes");
+    }
+
 }
