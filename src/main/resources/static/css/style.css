@@ -92,6 +92,18 @@ p{
     list-style: none;
 }
 
+.buttonlist li a{
+    background-color: #999999;
+    color: white;
+    display: block;
+    width: 800px;
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 15px;
+}
+
+
 .venuelist div a{
     background-color: #999999;
     color: white;
@@ -134,6 +146,10 @@ p{
     float: left;
 }
 .buttonlist li a:hover{
+    background-color: deeppink;
+}
+
+.venuelist div a:hover{
     background-color: deeppink;
 }
 .linkercontainer{
