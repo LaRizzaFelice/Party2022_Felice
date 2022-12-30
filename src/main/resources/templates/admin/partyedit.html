@@ -16,28 +16,28 @@
       <a th:href="@{|/venuedetails/${party.venue.id}|}" th:text="${party.venue.venueName}"
          class="linkLook">venue</a>
     </h3>
-    <form th:action="@{|/admin/partyedit/${party.id}|}" method="post">
+    <form th:action="@{|/admin/partyedit/${party.id}|}" th:object="${party}" method="post">
       <div class="venueinfo">
         <div class="infoLine">
           <label for="partyName" class="infoLineName">name: </label>
-          <input id="partyName" name="partyName" value="name" th:value="${party.name}" class="infoLineValue">
+          <input id="partyName" th:field="*{name}" class="infoLineValue">
         </div>
         <div class="infoLine" th:unless="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
           Free Party!
         </div>
         <div class="infoLine">
           <label for="pricePresaleInEur" class="infoLineName">price (presale): </label>
-          <input id="pricePresaleInEur" name="pricePresaleInEur" value="pricePresaleInEur" th:value="${party.pricePresaleInEur}" class="infoLineValue">
+          <input id="pricePresaleInEur" th:field="*{pricePresaleInEur}" class="infoLineValue">
           &nbsp;&euro;
         </div>
         <div class="infoLine">
           <label for="priceInEur" class="infoLineName">price: </label>
-          <input id="priceInEur" name="priceInEur" value="priceInEur" th:value="${party.priceInEur}" class="infoLineValue">
+          <input id="priceInEur" th:field="*{priceInEur}" class="infoLineValue">
           &nbsp;&euro;
         </div>
         <div class="infoLine">
           <label for="extraInfo" class="infoLineName">extra info: </label>
-          <input id="extraInfo" name="extraInfo" value="extraInfo" th:value="${party.extraInfo}" class="infoLineValue">
+          <input id="extraInfo"  th:field="*{extraInfo}" class="infoLineValue">
         </div>
         <div class="infoLine">
           <div class="infoLineName">where:</div>
