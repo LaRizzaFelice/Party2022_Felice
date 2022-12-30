@@ -9,17 +9,18 @@
 
 
 <div class="row1">
-  <div class="row1content">
+  <div class="row1content" th:object="${party}">
 
 
     <h2>new party</h2>
+    <div class="error" th:if="${#fields.hasErrors('*')}">ERROR - data is not saved</div>
 
-    <form th:action="@{|/admin/partynew|}" method="post" th:object="${party}">
+    <form th:action="@{|/admin/partynew|}" method="post">
 
       <div class="venueinfo">
         <div class="infoLine">
           <label for="partyName" class="infoLineName">name: </label>
-          <input id="partyName" th:field="*{name}" class="infoLineValue">
+          <input id="partyName" th:field="*{name}" class="infoLineValue" th:errorclass="fieldError">
         </div>
         <div class="infoLine">
           <label for="venue" class="infoLineName">venue: </label>
@@ -31,7 +32,7 @@
         </div>
         <div class="infoLine">
           <label for="date" class="infoLineName">date <i>(dd/MM/yyyy)</i>: </label>
-          <input id="date" th:field="*{date}" class="infoLineValue">
+          <input id="date" th:field="*{date}" class="infoLineValue" th:errorclass="fieldError">
         </div>
         <div class="infoLine">
           <label for="pricePresaleInEur" class="infoLineName">price (presale): </label>
@@ -51,8 +52,17 @@
         </div>
         <div class="infoLine">
           <label for="doors" class="infoLineName">doors <i>(hh:mm)</i>: </label>
-          <input id="doors" th:field="*{doors}"
-                 class="infoLineValue">
+          <input id="doors" th:field="*{doors}" class="infoLineValue" th:errorclass="fieldError">
+        </div>
+        <div class="infoLine">
+          <label for="artists" class="infoLineName"></label>
+          <select multiple id="artists" name="artistIds" class="infoLineValue">
+            <option value=""></option>
+            <option th:each="artist:${artists}" value="one artist id" th:value="${artist.id}"
+                    th:text="${artist.artistName}">
+              one artist
+            </option>
+          </select>
         </div>
 
         <div class="infoLine">
@@ -63,9 +73,6 @@
     </form>
   </div>
 </div>
-
-
-<div th:replace="fragments/footer :: footer">Footer</div>
 
 </body>
 </html>
