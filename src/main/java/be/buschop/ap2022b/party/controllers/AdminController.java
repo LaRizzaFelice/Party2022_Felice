@@ -15,36 +15,32 @@ import java.util.Optional;
 @RequestMapping("/admin")
 public class AdminController {
     private Logger logger = LoggerFactory.getLogger(AdminController.class);
-
     @Autowired
     private PartyRepository partyRepository;
-
     @GetMapping("/partyedit/{id}")
     public String partyEdit(Model model,
-
-        @PathVariable int id) {
-            logger.info("partyEdit " + id);
-
+                            @PathVariable int id) {
+        logger.info("partyEdit " + id);
         Optional<Party> optionalParty = partyRepository.findById(id);
         if (optionalParty.isPresent()) {
             model.addAttribute("party", optionalParty.get());
         }
         return "admin/partyedit";
     }
-
-        @PostMapping("/partyedit/{id}")
-        public String partyEditPost(Model model,
-        @PathVariable int id,
-        @RequestParam String partyName) {
-            logger.info("partyEditPost " + id + " -- new name=" + partyName);
+    @PostMapping("/partyedit/{id}")
+    public String partyEditPost(Model model,
+                                @PathVariable int id,
+        @ModelAttribute("party") Party party) {
+            logger.info("partyEditPost " + id + " -- new name=" + party.getName());
             Optional<Party> optionalParty = partyRepository.findById(id);
             if (optionalParty.isPresent()) {
-                Party party = optionalParty.get();
-                party.setName(partyName);
-                partyRepository.save(party);
-                model.addAttribute("party", party);
+                Party editedParty = optionalParty.get();
+                editedParty.setName(party.getName());
+                editedParty.setPricePresaleInEur(party.getPricePresaleInEur());
+                editedParty.setPriceInEur(party.getPriceInEur());
+                editedParty.setExtraInfo(party.getExtraInfo());
+                partyRepository.save(editedParty);
             }
-            return "admin/partyedit";
+            return "redirect:/partydetails/"+id;
         }
-
-}
+    }
