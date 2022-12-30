@@ -250,4 +250,13 @@ a.smallButton {
     float: left;
 }
 
+.error {
+    color: red;
+    font-size: larger;
+}
+
+.fieldError, input.fieldError {
+    background-color: red;
+}
+
 

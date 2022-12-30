@@ -8,21 +8,40 @@
 <body>
 <div th:replace="fragments/header :: header">header</div>
 <div class="row1">
-  <div class="row1content" th:if="${party}">
-    <h2 th:text="${party.name}">partydetails</h2>
+  <div class="row1content" th:if="${party}" th:object="${party}">
+
+
+    <h2 th:text="*{name}">partydetails</h2>
+    <div class="error" th:if="${#fields.hasErrors('*')}">ERROR - data is not saved</div>
+
     <h3>
-      <span th:text="${party.date}">date</span>
+      <span th:text="*{#dates.format(date, 'dd/MM/yyyy')}">date</span>
       in
-      <a th:href="@{|/venuedetails/${party.venue.id}|}" th:text="${party.venue.venueName}"
+      <a th:href="@{|/venuedetails/*{venue.id}|}" th:text="*{venue.venueName}"
          class="linkLook">venue</a>
     </h3>
-    <form th:action="@{|/admin/partyedit/${party.id}|}" th:object="${party}" method="post">
+
+    <form th:action="@{|/admin/partyedit/*{id}|}" method="post">
+
       <div class="venueinfo">
         <div class="infoLine">
           <label for="partyName" class="infoLineName">name: </label>
-          <input id="partyName" th:field="*{name}" class="infoLineValue">
+          <input id="partyName" th:field="*{name}" class="infoLineValue"  th:errorclass="fieldError">
         </div>
-        <div class="infoLine" th:unless="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
+        <div class="infoLine">
+          <label for="venue" class="infoLineName">venue: </label>
+          <select id="venue" th:name="venueId" class="infoLineValue">
+            <option th:each="v:${venues}" th:value="${v.id}"
+                    th:text="${v.venueName}" th:selected="${v.id==party.venue.id}">
+              one venue
+            </option>
+          </select>
+        </div>
+        <div class="infoLine">
+          <label for="date" class="infoLineName">date <i>(dd/mm/yyyy)</i>: </label>
+          <input id="date" th:field="*{date}" class="infoLineValue">
+        </div>
+        <div class="infoLine" th:unless="*{pricePresaleInEur!=null || priceInEur!=null}">
           Free Party!
         </div>
         <div class="infoLine">
@@ -37,33 +56,34 @@
         </div>
         <div class="infoLine">
           <label for="extraInfo" class="infoLineName">extra info: </label>
-          <input id="extraInfo"  th:field="*{extraInfo}" class="infoLineValue">
+          <input id="extraInfo" th:field="*{extraInfo}" class="infoLineValue">
         </div>
+        <div class="infoLine">
+          <label for="doors" class="infoLineName">doors <i>(HH:mm)</i>: </label>
+          <input id="doors" th:field="*{doors}" class="infoLineValue">
+        </div>
+
         <div class="infoLine">
           <div class="infoLineName">where:</div>
           <div class="infoLineValue"
-               th:text="|${party.venue.city} (${party.venue.distanceFromPublicTransportInKm} km from public transport)|">
+               th:text="|*{venue.city} (*{venue.distanceFromPublicTransportInKm} km from public transport)|">
             city and distance
           </div>
         </div>
-        <div class="infoLine" th:if="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
+        <div class="infoLine" th:if="*{pricePresaleInEur!=null || priceInEur!=null}">
           <div class="infoLineName">price:</div>
           <!--suppress SyntaxError -->
           <div class="infoLineValue"
-               th:text="|${party.pricePresaleInEur}${'&euro;'} (presale) / ${party.priceInEur}${'&euro;'}|">
+               th:text="|*{pricePresaleInEur}${'&euro;'} (presale) / *{priceInEur}${'&euro;'}|">
             pricePresaleInEur and price
           </div>
         </div>
-        <div class="infoLine">
-          <div class="infoLineName">doors</div>
-          <div class="infoLineValue" th:text="${party.doors}">date</div>
-        </div>
-        <div class="infoLine" th:if="${!party.extraInfo.isBlank()}">
+        <div class="infoLine" th:if="*{!extraInfo.isBlank()}">
           <div class="infoLineName">extraInfo</div>
-          <div class="infoLineValue" th:text="${party.extraInfo}">extraInfo</div>
+          <div class="infoLineValue" th:text="*{extraInfo}">extraInfo</div>
         </div>
         <div class="infoLine">
-          <a th:href="@{|/partydetails/${party.id}|}" class="buttonLook editButton">cancel</a>
+          <a th:href="@{|/partydetails/*{id}|}" class="buttonLook editButton">cancel</a>
           <input type="submit" value="save" class="buttonLook editButton">
         </div>
       </div>

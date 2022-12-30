@@ -1,26 +1,32 @@
 package be.buschop.ap2022b.party.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
 
 @Entity
 public class Party {
+
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "party_generator")
+    @SequenceGenerator(name = "party_generator", sequenceName = "party_seq", allocationSize = 1)
     @Id
     private Integer id;
+    @NotBlank
     private String name;
     private Integer pricePresaleInEur;
     private Integer priceInEur;
     private String extraInfo;
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date date;
     @Temporal(TemporalType.TIME)
+    @DateTimeFormat(pattern = "HH:mm")
     private Date doors;
-
     @ManyToOne(fetch = FetchType.LAZY)
     private Venue venue;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private Collection<Artist> artists;
 
     @ManyToMany(mappedBy = "parties", fetch = FetchType.LAZY)
@@ -33,7 +39,7 @@ public class Party {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 

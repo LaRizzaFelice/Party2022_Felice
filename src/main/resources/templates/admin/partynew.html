@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <title>Let's Party!</title>
+</head>
+<body>
+<div th:replace="fragments/header :: header">Header</div>
+
+
+<div class="row1">
+  <div class="row1content">
+
+
+    <h2>new party</h2>
+
+    <form th:action="@{|/admin/partynew|}" method="post" th:object="${party}">
+
+      <div class="venueinfo">
+        <div class="infoLine">
+          <label for="partyName" class="infoLineName">name: </label>
+          <input id="partyName" th:field="*{name}" class="infoLineValue">
+        </div>
+        <div class="infoLine">
+          <label for="venue" class="infoLineName">venue: </label>
+          <select id="venue" th:name="venueId" class="infoLineValue">
+            <option th:each="v:${venues}" th:value="${v.id}" th:text="${v.venueName}">
+              one venue
+            </option>
+          </select>
+        </div>
+        <div class="infoLine">
+          <label for="date" class="infoLineName">date <i>(dd/MM/yyyy)</i>: </label>
+          <input id="date" th:field="*{date}" class="infoLineValue">
+        </div>
+        <div class="infoLine">
+          <label for="pricePresaleInEur" class="infoLineName">price (presale): </label>
+          <input id="pricePresaleInEur" th:field="*{pricePresaleInEur}" class="infoLineValue">
+          &nbsp;&euro;
+        </div>
+        <div class="infoLine">
+          <label for="priceInEur" class="infoLineName">price: </label>
+          <input id="priceInEur" th:field="*{priceInEur}"
+                 class="infoLineValue">
+          &nbsp;&euro;
+        </div>
+        <div class="infoLine">
+          <label for="extraInfo" class="infoLineName">extra info: </label>
+          <textarea id="extraInfo" th:field="*{extraInfo}" cols="25"
+                    class="infoLineValue"></textarea>
+        </div>
+        <div class="infoLine">
+          <label for="doors" class="infoLineName">doors <i>(hh:mm)</i>: </label>
+          <input id="doors" th:field="*{doors}"
+                 class="infoLineValue">
+        </div>
+
+        <div class="infoLine">
+          <a th:href="@{|/partylist|}" class="buttonLook editButton">cancel</a>
+          <input type="submit" value="create" class="buttonLook editButton">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div th:replace="fragments/footer :: footer">Footer</div>
+
+</body>
+</html>
