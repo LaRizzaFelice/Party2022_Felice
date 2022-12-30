@@ -7,46 +7,76 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">header</div>
-<div th:if="${venue}">
-    <div class="border"><a th:href="@{|/venuedetails/${prevIndex}|}" href="#" class="nextprev">&lt;</a></div>
-    <div class="container">
-        <h1 th:text="${venue.getVenueName()}">venueTitle</h1>
-        <h1 th:text="|Venuename: ${venue.getVenueName()}|">venueDetails</h1>
+<div class="row1">
+    <div class="row1content" th:if="${venue}">
 
+        <div class="prevButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{|/venuedetails/${prevIndex}|}">&lt;</a>
+        </div>
+        <div class="nextButtonDiv">
+            <a class="buttonLook smallButton" th:href="@{|/venuedetails/${nextIndex}|}">&gt;</a>
+        </div>
+
+        <h2 th:text="${venue.getVenueName()}">venueTitle</h2>
+        <h2 th:text="|Venuename: ${venue.getVenueName()}|">venueDetails</h2>
+
+    <div class="venueinfo">
+
+        <div class="infoLine">
+            <div class="infoLineName">info:</div>
+            <div class="infoLineValue">
+                <a th:href="${venue.linkMoreInfo}" th:text="${venue.linkMoreInfo}" class="linkLook" target="_blank">linkMoreIfo</a>
+            </div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">capacity:</div>
+            <div class="infoLineValue" th:text="|${venue.capacity} persons|">max number of persons</div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">food provided:</div>
+            <div class="infoLineValue" th:text="${venue.isFoodProvided() ? 'yes' : 'no'}">isFoodProvided</div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">indoor:</div>
+            <div class="infoLineValue" th:text="${venue.isIndoor() ? 'yes' : 'no'}">isIndoor</div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">outdoor:</div>
+            <div class="infoLineValue" th:text="${venue.isOutdoor() ? 'yes' : 'no'}">isOutdoor</div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">free parking:</div>
+            <div class="infoLineValue" th:text="${venue.isFreeParkingAvailable() ? 'yes' : 'no'}">
+                isFreeParkingAvailable
+            </div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">city:</div>
+            <div class="infoLineValue" th:text="${venue.city}">city</div>
+        </div>
+        <div class="infoLine">
+            <div class="infoLineName">distance from public transport:</div>
+            <div class="infoLineValue" th:text="${venue.distanceFromPublicTransportInKm} + ' km'">city</div>
+        </div>
     </div>
-    <div class="linkercontainer">
-        <p>info:</p>
-        <p>capacity:</p>
-        <p>food provided:</p>
-        <p>indoor:</p>
-        <p>outdoor:</p>
-        <p>free parking:</p>
-        <p>city:</p>
-        <p>distance from public transport:</p></div>
-    <div class="rechtercontainer">
-        <p th:text="${venue.getLinkMoreInfo()}"> Get more info</p>
-        <p th:text="${venue.getCapacity()}">Capacity</p>
-        <p th:text="${venue.isFoodProvided()}">Is food provided</p>
-        <p th:text="${venue.isIndoor()}">Is indoor</p>
-        <p th:text="${venue.isOutdoor()}">Is outdoor</p>
-        <p th:text="${venue.isFreeParkingAvailable()}">Is free parking available</p>
-        <p th:text="${venue.getCity()}">City</p>
-        <p th:text="${venue.getDistanceFromPublicTransportInKm()}">Distance from public transport in km</p></div>
-    <div class="border"><a th:href="@{|/venuedetails/${nextIndex}|}" href="#" class="nextprev">&gt;</a></div>
 </div>
-<div class="container">
-    <div class="containerbelow">
-        <h1 class="container"  th:text="|Parties in ${venue.venueName}|">parties in this venue</h1>
+</div>
+</div>
 
-        <ul class="buttonlist">
-            <li th:each="party:${parties}">
-                <a class="container" th:href="@{|/partydetails/${party.id}|}">
+<div class="row1"  th:if="${venue}">
+    <div class="row1content">
+        <h2  th:text="|parties in ${venue.venueName}|">parties in this venue</h2>
+
+        <div class="venuelist">
+            <div th:each="party:${parties}">
+                <a class="buttonlist" th:href="@{|/partydetails/${party.id}|}">
                     <span th:text="${party.name}">venue name </span>
                 </a>
-            </li>
-        </ul>
-
+            </div>
+        </div>
     </div>
 </div>
+
+
 </body>
 </html>

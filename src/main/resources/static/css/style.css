@@ -4,7 +4,7 @@ html, body{
     padding: 0;
     margin: 0;
 }
-h1{
+h2{
     color: deeppink;
     font-size: 18px;
 }
@@ -92,7 +92,7 @@ p{
     list-style: none;
 }
 
-.buttonlist li a{
+.venuelist div a{
     background-color: #999999;
     color: white;
     display: block;
@@ -166,3 +166,72 @@ p{
     position: absolute;
     right: 60px;
 }
+
+.venueinfo {
+    margin: 30px 0;
+}
+
+.venueExtraInfo {
+    font-size: small;
+}
+
+.infoLine {
+    margin: 15px 0;
+    font-size: 1em;
+    display: flex;
+}
+
+.infoLineName {
+    width: 13em;
+}
+
+.infoLineValue {
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.row1 {
+    display: flex;
+    position: relative;
+    margin: 20px 0;
+}
+
+.row1 img {
+    width: 100%;
+    height: auto;
+}
+
+.row1content {
+    flex-grow: 4;
+    margin: 0 50px;
+}
+
+.prevButtonDiv {
+    position: absolute;
+    left: 10px;
+}
+
+.nextButtonDiv {
+    position: absolute;
+    right: 10px;
+}
+
+a.smallButton {
+    display: block;
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+.buttonLook {
+    background-color: #EDC7CF;
+    color: #6A8E7F;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: 1px 1px 1px darkgrey;
+}
+
+.venuelist {
+    float: left;
+}
+
+
