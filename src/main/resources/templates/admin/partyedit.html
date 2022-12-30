@@ -9,63 +9,69 @@
 <div th:replace="fragments/header :: header">header</div>
 <div class="row1">
   <div class="row1content" th:if="${party}">
-
-    <h1 th:text="${party.name}">partydetails</h1>
-
-    <h1>
+    <h2 th:text="${party.name}">partydetails</h2>
+    <h3>
       <span th:text="${party.date}">date</span>
       in
-      <a th:href="@{|/venuedetails/${party.venue.id}|}" th:text="${party.venue.venueName}">venue</a>
-    </h1>
-    <div class="linkercontainer">
-      <p>price:</p>
-      <p>where:</p>
-      <p>doors:</p>
-      <p>extraInfo</p>
-      <p>name:</p></div>
-
-    <div class="rechtercontainer">
-      <p th:unless="${party.pricePresaleInEur!=null || party.priceInEur!=null}"> Free Party!</p>
-      <p th:unless="|${party.pricePresaleInEur}&euro; (presale) / ${party.priceInEur}&euro;|"> pricePresaleInEur
-        and price</p>
-      <p th:text="|${party.venue.city} (${party.venue.distanceFromPublicTransportInKm} km from public transport)|">
-        city and distance</p>
-      <p th:text="${party.doors}">date</p>
-      <p th:unless="${!party.extraInfo.isBlank()}"> No extra info available</p>
-      <p th:text="${party.extraInfo}">extraInfo</p>
-      <form th:action="@{|/admin/partyedit/${party.id}|}" method="post">
-        <input th:value="${party.name}" type="text" name="partyName">
-        <input type="text" id="fname" name="fname">
-
-      </form>
-    </div>
-    <div class="container">
-      <div class="containerbelow">
-        <h1 class="container">Save party:</h1>
-        <ul class="buttonlist">
-          <li>
-            <a class="container" th:href="@{|/partydetails/${party.id}|}">SAVE
-            </a>
-          </li>
-        </ul>
+      <a th:href="@{|/venuedetails/${party.venue.id}|}" th:text="${party.venue.venueName}"
+         class="linkLook">venue</a>
+    </h3>
+    <form th:action="@{|/admin/partyedit/${party.id}|}" method="post">
+      <div class="venueinfo">
+        <div class="infoLine">
+          <label for="partyName" class="infoLineName">name: </label>
+          <input id="partyName" name="partyName" value="name" th:value="${party.name}" class="infoLineValue">
+        </div>
+        <div class="infoLine" th:unless="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
+          Free Party!
+        </div>
+        <div class="infoLine">
+          <label for="pricePresaleInEur" class="infoLineName">price (presale): </label>
+          <input id="pricePresaleInEur" name="pricePresaleInEur" value="pricePresaleInEur" th:value="${party.pricePresaleInEur}" class="infoLineValue">
+          &nbsp;&euro;
+        </div>
+        <div class="infoLine">
+          <label for="priceInEur" class="infoLineName">price: </label>
+          <input id="priceInEur" name="priceInEur" value="priceInEur" th:value="${party.priceInEur}" class="infoLineValue">
+          &nbsp;&euro;
+        </div>
+        <div class="infoLine">
+          <label for="extraInfo" class="infoLineName">extra info: </label>
+          <input id="extraInfo" name="extraInfo" value="extraInfo" th:value="${party.extraInfo}" class="infoLineValue">
+        </div>
+        <div class="infoLine">
+          <div class="infoLineName">where:</div>
+          <div class="infoLineValue"
+               th:text="|${party.venue.city} (${party.venue.distanceFromPublicTransportInKm} km from public transport)|">
+            city and distance
+          </div>
+        </div>
+        <div class="infoLine" th:if="${party.pricePresaleInEur!=null || party.priceInEur!=null}">
+          <div class="infoLineName">price:</div>
+          <!--suppress SyntaxError -->
+          <div class="infoLineValue"
+               th:text="|${party.pricePresaleInEur}${'&euro;'} (presale) / ${party.priceInEur}${'&euro;'}|">
+            pricePresaleInEur and price
+          </div>
+        </div>
+        <div class="infoLine">
+          <div class="infoLineName">doors</div>
+          <div class="infoLineValue" th:text="${party.doors}">date</div>
+        </div>
+        <div class="infoLine" th:if="${!party.extraInfo.isBlank()}">
+          <div class="infoLineName">extraInfo</div>
+          <div class="infoLineValue" th:text="${party.extraInfo}">extraInfo</div>
+        </div>
+        <div class="infoLine">
+          <a th:href="@{|/partydetails/${party.id}|}" class="buttonLook editButton">cancel</a>
+          <input type="submit" value="save" class="buttonLook editButton">
+        </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="containerbelow">
-        <h1 class="container">Cancel party:</h1>
-        <ul class="buttonlist">
-          <li>
-            <a class="container" th:href="@{|/partydetails/${party.id}|}">CANCEL
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    </div>
+    </form>
   </div>
-</div>
-</div>
-
+  <div class="row1content" th:unless="${party}">
+    <p>no party was chosen</p>
+  </div>
 </div>
 </body>
 </html>
