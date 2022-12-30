@@ -20,7 +20,7 @@ public class PartyController {
     @Autowired
     private PartyRepository partyRepository;
 
-    @GetMapping("/partylist")
+    @GetMapping ("/partylist")
     public String partyList(Model model) {
         Iterable<Party> parties = partyRepository.findAll();
         model.addAttribute("parties", parties);

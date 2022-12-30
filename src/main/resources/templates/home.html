@@ -8,12 +8,20 @@
 </head>
 <body>
 <div th:replace="fragments/header :: header">header</div>
-
-<div class="container">
-    <h1>Overview of upcomming party's will be displayed soon - Website still under construction! </h1>
-    <BR>
-    <img class="imagehomepage" src="https://t4.ftcdn.net/jpg/01/16/65/29/360_F_116652906_y9YDrMad6vbHsUkFw9fjVG4uVeFNXcuM.jpg">
-    <h1>Even if the website is still under construction; Every button you'll click works and our data is up-to-date!! </h1>
+<div class="row1">
+    <div class="row1content">
+        <h2>Upcoming party's</h2>
+        <div class="cols2">
+            <div class="filters"></div>
+            <div class="venuelist">
+                <div th:each="party:${parties}">
+                    <a class="buttonLook mediumButton" th:href="@{|/partydetails/${party.id}|}">
+                        <span th:text="${party.name}">party name </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
