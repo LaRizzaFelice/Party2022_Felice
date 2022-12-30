@@ -21,11 +21,11 @@ public class HomeController {
     @Autowired
     private PartyRepository partyRepository;
 
-    @GetMapping({"/", "/home"})
+    @GetMapping("/home")
     public String home(Model model) {
         Iterable<Party> parties = partyRepository.findAll();
         model.addAttribute("parties", parties);
-        return "partylist";
+        return "home";
     }
 
     @GetMapping("/about")
