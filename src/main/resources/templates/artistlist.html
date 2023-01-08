@@ -12,20 +12,24 @@
         <h2>artists</h2>
         <div class="cols2">
             <div th:text="|${nrOfArtists} artists found|">10 artists</div>
+            <BR>
             <div th:unless="${showFilters}" class="filters">
                 <a class="buttonLook filterButton" th:href="@{/artistlist/filter}">filter</a>
             </div>
+            <BR>
             <div th:if="${showFilters}" class="filters">
-                <a class="buttonLook filterButton" th:href="@{/artistlist}">-</a>
+                <a class="buttonLook filterButton" th:href="@{/artistlist}"> Go back to full artistlist</a>
                 <form>
+                    <BR>
                     <div class="onefilter">
                         <input type="submit" value="search" class="buttonLook filterButton">
                     </div>
-                    <h3>keyword</h3>
+                    <h2>keyword</h2>
                     <div class="onefilter">
                         <label for="keyword" class="filtername"></label>
                         <input type="text" id="keyword" name="keyword" th:value="${keyword}" value="0">
                     </div>
+                    <BR>
                 </form>
             </div>
             <div class="venuelist">

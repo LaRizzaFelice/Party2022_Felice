@@ -13,9 +13,11 @@
         <h2>venues</h2>
         <div class="cols2">
             <div th:text="|${nrOfVenues} venues found|">10 venues</div>
+            <BR>
             <div th:unless="${showFilters}" class="filters">
                 <a class="buttonLook filterButton" th:href="@{/venuelist/filter}">filter</a>
             </div>
+            <BR>
             <div th:if="${showFilters}" class="filters">
                 <a class="buttonLook filterButton" th:href="@{/venuelist}">-</a>
                 <form>
